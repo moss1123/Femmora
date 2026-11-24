@@ -155,7 +155,7 @@ export default function CollectionHero() {
             <span className="label">The Collection</span>
           </div>
           <p className="label-sm col-hero__season">
-            Chapter One · {FLAGSHIP.place}, {FLAGSHIP.city} — {FLAGSHIP.when}
+            Chapter One · Flagship, {FLAGSHIP.place} {FLAGSHIP.city} — {FLAGSHIP.when.replace('Flagship · ', '')}
           </p>
         </motion.div>
 

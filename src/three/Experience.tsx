@@ -21,7 +21,8 @@ export default function Experience({ active }: { active: boolean }) {
   const [fx, setFx] = useState(true)
 
   const cinematic = phase === 'selecting' || phase === 'intro' || phase === 'returning'
-  const running = active && (heroVisible || cinematic)
+  // keep drawing until the first frames are in (otherwise a page scrolled past the hero never lifts the loader)
+  const running = active && (heroVisible || cinematic || !sceneReady)
 
   useEffect(() => {
     document.documentElement.classList.toggle('is-3d-loading', active && !sceneReady)

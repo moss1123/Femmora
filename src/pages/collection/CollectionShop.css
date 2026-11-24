@@ -200,7 +200,8 @@
   height: 13px;
   border-radius: 50%;
   background: var(--sw);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 0 0 1px rgba(201, 165, 92, 0.18);
+  /* a gold hairline ring keeps Noir / Charcoal / Navy visible on the wine ground (≥3:1, WCAG 1.4.11) */
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 0 0 1px rgba(201, 165, 92, 0.6);
   transition: transform 0.5s var(--ease-lux);
 }
 .col-swatch::after {
@@ -638,7 +639,7 @@
   height: 10px;
   border-radius: 50%;
   background: var(--dot);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18), 0 0 0 1px rgba(201, 165, 92, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18), 0 0 0 1px rgba(201, 165, 92, 0.6);
 }
 .col-dot::after {
   content: '';

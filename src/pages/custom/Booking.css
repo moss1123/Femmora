@@ -128,7 +128,7 @@
   font-style: italic;
   font-size: 1.08rem;
   line-height: 1.3;
-  color: var(--fg-faint);
+  color: var(--fg-muted);
 }
 .cus-ticket__rows dd span {
   display: inline-block;
@@ -156,7 +156,8 @@
   transition: transform 0.9s var(--ease-lux);
 }
 .cus-ticket__ref {
-  color: var(--fg-faint);
+  /* small caps on burgundy: --fg-faint is only 3.3:1 */
+  color: var(--fg-muted);
   transition: color 0.6s var(--ease-lux);
 }
 .cus-ticket.is-held .cus-ticket__ref {
@@ -1291,6 +1292,17 @@
 }
 
 /* ── responsive ── */
+/* two-column booking at its narrowest: let "PKR 12,000 – 25,000 per piece" break after the figure, so the service
+   names keep a readable measure instead of being squeezed to ~170px */
+@media (min-width: 1100px) and (max-width: 1279px) {
+  .cus-svc__meta {
+    max-width: 10rem;
+  }
+  .cus-svc__price {
+    white-space: normal;
+  }
+}
+
 @media (max-width: 1099px) {
   .cus-join {
     grid-template-columns: minmax(0, 1fr);

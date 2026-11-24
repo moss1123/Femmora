@@ -155,7 +155,12 @@ export default function Finale() {
           <ul className="hs-fin__list">
             {PAGES.map((p) => (
               <li key={p.id} className={`hs-fin__item hs-fin__item--${p.id}`}>
-                <TLink to={p.path} className="hs-fin__link" cursor={p.title} aria-label={`${p.title} — ${p.kicker}`}>
+                <TLink
+                  to={p.path}
+                  className="hs-fin__link"
+                  cursor={p.title}
+                  aria-label={`${p.title} — ${p.kicker}. ${NOTES[p.id].verb}`}
+                >
                   <span className="hs-fin__ink" aria-hidden />
                   <span className="hs-fin__drop" aria-hidden>
                     <span className="hs-fin__swing">

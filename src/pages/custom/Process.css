@@ -62,7 +62,8 @@
   align-items: flex-start;
   gap: 0.25rem;
   padding-bottom: 0.35rem;
-  color: var(--fg-faint);
+  /* small caps on burgundy: --fg-faint is only 3.3:1 */
+  color: var(--fg-muted);
 }
 .cus-process__count-of .numeral {
   font-size: 1.5rem;
@@ -298,8 +299,9 @@
   .cus-process:not(.is-static) .cus-step--down .cus-step__card::before {
     bottom: calc(100% + 0.3rem);
   }
+  /* stations already passed stay legible (their small-caps meta keeps ≥4.5:1 at this opacity) */
   .cus-process:not(.is-static) .cus-step.is-on .cus-step__card {
-    opacity: 0.62;
+    opacity: 0.78;
     transform: translate(-50%, 0);
   }
   .cus-process:not(.is-static) .cus-step.is-current .cus-step__card {
@@ -365,7 +367,7 @@
     flex-direction: column;
     align-items: flex-end;
     gap: 0.8rem;
-    color: var(--fg-faint);
+    color: var(--fg-muted);
   }
   .cus-process__bar {
     position: relative;
@@ -392,9 +394,10 @@
   .cus-process:not(.is-static) .cus-process__count-n {
     font-size: 4.5rem;
   }
+  /* the raised stations (II, IV) hang ~4.25rem above the track: keep them clear of the heading */
   .cus-process:not(.is-static) .cus-process__track {
-    margin-top: 3.75rem;
-    margin-bottom: 3.75rem;
+    margin-top: 4.75rem;
+    margin-bottom: 3.5rem;
   }
   .cus-process:not(.is-static) .cus-stage__body {
     font-size: 1.25rem;

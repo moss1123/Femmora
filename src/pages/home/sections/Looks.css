@@ -248,9 +248,11 @@
 @media (min-width: 1024px) and (min-height: 680px) and (prefers-reduced-motion: no-preference),
   (min-width: 768px) and (min-height: 900px) and (prefers-reduced-motion: no-preference) {
   .hs-looks__stage {
-    /* the card is 200:420; 19rem is the head, captions and CTA that share the viewport with it */
+    /* the card is 200:420; 19rem is the head, captions and CTA that share the viewport with it.
+       100% resolves against the row (grid-template-columns), so a classic scrollbar never pushes
+       four cards past the gutters the way 100vw would. */
     --card-w: min(
-      calc((100vw - 2 * var(--gutter) - 3 * var(--gap)) / 4),
+      calc((100% - 3 * var(--gap)) / 4),
       calc((100svh - var(--nav-h) - 19rem) * 0.476),
       18.5rem
     );
@@ -398,7 +400,7 @@
 @media (min-width: 1024px) and (min-height: 860px) and (prefers-reduced-motion: no-preference) {
   .hs-looks__stage {
     --card-w: min(
-      calc((100vw - 2 * var(--gutter) - 3 * var(--gap)) / 4),
+      calc((100% - 3 * var(--gap)) / 4),
       calc((100svh - var(--nav-h) - 21.5rem) * 0.476),
       18.5rem
     );

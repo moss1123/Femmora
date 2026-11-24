@@ -24,7 +24,7 @@ export default function Marquee({ items, speed = 40, className = '' }: { items: 
   )
   const row = [...items, ...items]
   return (
-    <div ref={root} className={`mq ${className}`} style={{ overflow: 'hidden', whiteSpace: 'nowrap' }} aria-label={items.join(', ')}>
+    <div ref={root} className={`mq ${className}`} role="marquee" style={{ overflow: 'hidden', whiteSpace: 'nowrap' }} aria-label={items.join(', ')}>
       <div className="mq__track" style={{ display: 'inline-flex', willChange: 'transform' }}>
         {row.map((t, i) => (
           <span

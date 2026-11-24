@@ -235,7 +235,9 @@ function Seal({ reduce }: { reduce: boolean }) {
         initial={{ opacity: reduce ? 1 : 0, scale: reduce ? 1 : 0.6 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.9, ease: EASE, delay: 0.9 }}
-        style={{ transformOrigin: '60px 60px' }}
+        // motion defaults SVG transforms to transform-box: fill-box, which would read 60px 60px from the glyph's own corner;
+        // view-box keeps the origin at the seal's centre
+        style={{ transformBox: 'view-box', transformOrigin: '60px 60px' }}
       >
         F
       </motion.text>
@@ -281,6 +283,13 @@ export default function Booking({ preset }: { preset: BookingPreset | null }) {
       const next = { ...f, [k]: v }
       return k === 'location' || k === 'date' ? reconcile(next) : next
     })
+
+  /** A choice on steps I–II answers the error that was showing; the next missing piece is only raised on the next
+   *  "Continue" — so picking a place never fires an instant "choose a date" alert at her. */
+  const choose = <K extends 'service' | 'location' | 'date' | 'time'>(k: K, v: FormState[K]) => {
+    set(k, v)
+    setAttempted((a) => (a[0] || a[1] ? [false, false, a[2]] : a))
+  }
 
   // A preset from elsewhere on the page (hero, tiers, fit profile, organisations, the Circle, FAQ): start again at the
   // service step — and move focus with the scroll, so keyboard and screen-reader users land on the form, not behind it.
@@ -544,7 +553,7 @@ export default function Booking({ preset }: { preset: BookingPreset | null }) {
                     checked={on}
                     aria-invalid={shown.service ? true : undefined}
                     onChange={() => {
-                      set('service', s.id)
+                      choose('service', s.id)
                       setPicked(null)
                     }}
                   />
@@ -589,7 +598,7 @@ export default function Booking({ preset }: { preset: BookingPreset | null }) {
               const L = LOCATIONS[id]
               return (
                 <label key={id} className={`cus-loc__opt ${on ? 'is-on' : ''}`} data-cursor="">
-                  <input type="radio" className="sr-only" name="cus-location" value={id} checked={on} onChange={() => set('location', id)} />
+                  <input type="radio" className="sr-only" name="cus-location" value={id} checked={on} onChange={() => choose('location', id)} />
                   <span className="cus-loc__box">
                     <span className="cus-loc__icon">
                       <LocationIcon id={id} corporate={corporate} />
@@ -645,7 +654,7 @@ export default function Booking({ preset }: { preset: BookingPreset | null }) {
                           value={d.iso}
                           checked={on}
                           disabled={d.closed}
-                          onChange={() => set('date', d.iso)}
+                          onChange={() => choose('date', d.iso)}
                           aria-label={`${d.long}${d.closed ? ', closed' : ''}`}
                         />
                         <span className="cus-day__box" aria-hidden>
@@ -696,7 +705,7 @@ export default function Booking({ preset }: { preset: BookingPreset | null }) {
                         value={s.time}
                         checked={on}
                         disabled={s.taken}
-                        onChange={() => set('time', s.time)}
+                        onChange={() => choose('time', s.time)}
                         aria-label={`${s.time}${s.taken ? ', already booked' : ''}`}
                       />
                       <span className="cus-slot__box" aria-hidden>
@@ -821,7 +830,8 @@ export default function Booking({ preset }: { preset: BookingPreset | null }) {
           </div>
           <Reveal className="cus-head__r" delay={0.15}>
             <p className="lead">
-              Choose a service, a place and a time — at the Dolmen Mall flagship from January 2027, or privately, at home or the office, today.
+              Choose a service, a place and a time — at our Dolmen Mall flagship in Lahore from January 2027, or privately, at home or the
+              office, today.
               Every request is confirmed personally by the {BRAND.whatsapp}.
             </p>
           </Reveal>

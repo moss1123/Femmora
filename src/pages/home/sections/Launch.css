@@ -362,7 +362,8 @@
   transition: border-color 0.4s var(--ease-lux), box-shadow 0.4s var(--ease-lux);
 }
 .hs-pl__input::placeholder {
-  color: var(--fg-faint);
+  /* the example format must stay legible: --fg-faint measured ~3.3:1 on the card, this clears 4.5:1 */
+  color: rgba(248, 244, 236, 0.52);
   font-style: italic;
 }
 .hs-pl__input:hover {

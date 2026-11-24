@@ -116,10 +116,12 @@ export default function CollectionShop({ onQuickView }: { onQuickView: (t: Quick
     if (prefersReducedMotion()) ScrollTrigger.refresh()
   }, [layoutKey])
 
-  // never leave a half-run Flip (with absolutely positioned leavers) behind on unmount
+  // never leave a half-run Flip behind on unmount. kill() only — completing it would fire
+  // onComplete (gsap.set + ScrollTrigger.refresh) against a grid that has already left the DOM,
+  // in the middle of the route transition.
   useEffect(
     () => () => {
-      flipTl.current?.progress(1).kill()
+      flipTl.current?.kill()
       flipTl.current = null
     },
     [],

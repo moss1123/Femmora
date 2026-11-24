@@ -26,7 +26,7 @@ const DRESS: Record<string, TierDress> = {
     numeral: 'II',
     kicker: 'The signature',
     forWhom: 'For the fit no rack has ever offered — measured once, remembered for every order after.',
-    cta: { label: 'Book a measuring', to: '/custom#book', variant: 'gold', cursor: 'Book' },
+    cta: { label: 'Book a fitting', to: '/custom#book', variant: 'gold', cursor: 'Book' },
   },
   consult: {
     numeral: 'III',
@@ -108,7 +108,8 @@ export default function Tiers() {
               measurements; or let us build the whole working wardrobe around you.
             </p>
             <p className="label-sm hs-tiers__note">
-              Prices in PKR <span className="hs-dia" aria-hidden /> No sales, no discount codes — one honest price
+              Prices in PKR <span className="hs-dia" aria-hidden /> No sales, no discount codes, no instalments — one
+              honest price
             </p>
           </div>
         </header>

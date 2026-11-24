@@ -407,7 +407,8 @@
   color: var(--accent);
 }
 .cus-fit__card-no {
-  color: var(--fg-faint);
+  /* small caps on burgundy: --fg-faint is only 3.3:1 */
+  color: var(--fg-muted);
 }
 .cus-fit__card-title {
   margin-top: 0.9rem;
@@ -490,7 +491,8 @@
   font-family: var(--font-sans);
   font-size: 0.95rem;
   font-variant-numeric: tabular-nums;
-  color: var(--fg-faint);
+  /* "—" and "Check" are information too — keep them at ≥4.5:1 on the burgundy card */
+  color: var(--fg-muted);
 }
 .cus-fit__list .is-ok dd {
   color: var(--ivory-100);
@@ -599,6 +601,10 @@
   }
   .cus-fit__svg {
     max-height: 420px;
+  }
+  /* at ~155px wide the figure's value tags would render at ~5px — the summary card carries the numbers on phones */
+  .cus-fit__tag {
+    display: none;
   }
   .cus-fit__how {
     border-top: 0;

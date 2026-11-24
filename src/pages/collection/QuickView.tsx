@@ -474,7 +474,7 @@ function Content({ product: p, initialColour, focusOnMount, onClose, onSwitch }:
               <p className="col-qv__mtm-none">
                 {sized
                   ? 'Offered in Core ready-to-wear — one consistent Femmora size chart.'
-                  : 'One size, adjustable — no fitting needed.'}
+                  : 'One size — no fitting needed.'}
               </p>
             )}
 

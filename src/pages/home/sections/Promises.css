@@ -134,6 +134,10 @@
 .hs-promise--arch .hs-promise__reveal {
   --cap: 13rem;
   --ar: 175 / 290;
+  /* the arch is 1.66× taller than wide: in the stacked flow it starts higher and narrower, so its
+     foot clears the figure caption at the bottom-right (it ran beneath the caption at 375px) */
+  top: 4%;
+  width: min(var(--cap), 50vw);
 }
 .hs-promise--arch .hs-promise__reveal,
 .hs-promise--arch .hs-promise__mask {
@@ -348,6 +352,7 @@
   }
   /* the arch is 1.66× taller than wide: keep it inside the panel's height (nav + track padding = nav-h + 7rem) */
   .hs-promise--arch .hs-promise__reveal {
+    top: 14%;
     width: min(var(--cap), 34vh, calc((100svh - var(--nav-h) - 7rem) * 0.45 - 0.7rem));
   }
   .hs-promise__art {

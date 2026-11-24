@@ -13,7 +13,7 @@ const SEATS_X = [78, 104, 130, 156, 182]
 function BoardroomTable() {
   return (
     <svg className="hs-bind__svg" viewBox="0 0 260 170" role="img" aria-labelledby="hs-bind-svg-t">
-      <title id="hs-bind-svg-t">A boardroom table with eleven seats. A single gold seat sits at its head.</title>
+      <title id="hs-bind-svg-t">A boardroom table seen from above: eleven hairline seats, and a single gold seat at its head.</title>
       <g className="hs-bind__tabletop" fill="none" stroke="currentColor" strokeWidth="1" vectorEffect="non-scaling-stroke">
         <rect x="56" y="58" width="148" height="54" rx="27" />
         <rect x="64" y="66" width="132" height="38" rx="19" strokeDasharray="2 4" opacity="0.55" />

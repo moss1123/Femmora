@@ -25,6 +25,15 @@
 .nav.is-scrolled::after {
   opacity: 0.14;
 }
+/* once scrolled, a soft veil keeps page text from colliding with the nav links */
+.nav.is-scrolled {
+  background: rgba(20, 5, 10, 0.58);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  backdrop-filter: blur(14px) saturate(1.1);
+}
+.nav--light.is-scrolled {
+  background: rgba(243, 237, 226, 0.74);
+}
 .nav--light {
   color: var(--wine-900);
 }

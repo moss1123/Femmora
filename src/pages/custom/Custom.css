@@ -78,6 +78,11 @@
 
 /* Phones: long tracked-caps labels ("Request a programme outline", "Book a measuring session") must fit a 343px
    column — tighten the tracking a touch and let a label wrap rather than overflow its button. */
+/* Ghost (text + underline) buttons collapse to the height of their label; give every one on this page a 44px target. */
+.cus .fbtn--ghost {
+  min-height: 44px;
+}
+
 @media (max-width: 480px) {
   .cus .fbtn {
     max-width: 100%;

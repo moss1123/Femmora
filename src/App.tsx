@@ -16,6 +16,13 @@ import { initLenis, ScrollTrigger } from './lib/motion'
 
 const Experience = lazy(() => import('./three/Experience'))
 
+const TITLES: Record<string, string> = {
+  '/': 'Femmora — For women who lead.',
+  '/styling': 'Styling — Dress the woman you’re becoming · Femmora',
+  '/collection': 'The Collection — Beyond the Silhouette, Chapter One · Femmora',
+  '/custom': 'Custom Services — Made to measure. Made to lead. · Femmora',
+}
+
 function Shell() {
   const location = useLocation()
   const onHome = location.pathname === '/'
@@ -42,6 +49,7 @@ function Shell() {
     }
     prev.current = location.pathname
     document.documentElement.dataset.route = location.pathname.replace('/', '') || 'home'
+    document.title = TITLES[location.pathname] ?? TITLES['/']
     requestAnimationFrame(() => ScrollTrigger.refresh())
   }, [location.pathname, onHome])
 

@@ -29,7 +29,10 @@ interface Order {
   mtm: boolean
 }
 
-const detailOf = (i: CartItem) => `${i.colour} · ${i.fit === 'made-to-measure' ? 'Made-to-Measure' : `Size ${i.size}`}`
+/** "Size M", "Made-to-Measure" — and a one-size accessory reads "One size", never "Size One size" */
+const sizeOf = (i: CartItem) =>
+  i.fit === 'made-to-measure' ? 'Made-to-Measure' : /^one size$/i.test(i.size) ? 'One size' : `Size ${i.size}`
+const detailOf = (i: CartItem) => `${i.colour} · ${sizeOf(i)}`
 
 /**
  * The global bag: a right-hand slide-out over a dimmed page. Opened by the nav bag button
@@ -72,12 +75,13 @@ export default function CartDrawer() {
     useCart.getState().setOpen(false)
   }, [pathname])
 
-  // closing mid-checkout abandons it
+  // closing mid-checkout abandons it — and returns the bag to its list, so a quick re-open
+  // (before the exit finishes and onExitComplete resets) is never stuck on "Placing…"
   useEffect(() => {
-    if (!open) {
-      window.clearTimeout(timer.current)
-      cancelAnimationFrame(raf.current)
-    }
+    if (open) return
+    window.clearTimeout(timer.current)
+    cancelAnimationFrame(raf.current)
+    setStage((s) => (s === 'processing' ? 'bag' : s))
   }, [open])
   useEffect(
     () => () => {
@@ -385,7 +389,7 @@ export default function CartDrawer() {
                   >
                     {stage === 'processing' ? 'Placing your demo order…' : 'Checkout'}
                   </Button>
-                  <p className="bag__fine">Prices in PKR, per piece · Demo storefront — no payment is taken</p>
+                  <p className="bag__fine">Prices in PKR · Demo storefront — no payment is taken</p>
                 </motion.footer>
               )}
             </AnimatePresence>
@@ -436,10 +440,16 @@ function BagRow({ item, index, reduced, onQty, onRemove, ref }: RowProps & { ref
   const hex = product?.colours.find((c) => c.name === item.colour)?.hex ?? '#6e1423'
   const mtm = item.fit === 'made-to-measure'
   const incRef = useRef<HTMLButtonElement>(null)
+  const decRef = useRef<HTMLButtonElement>(null)
+  // a button that disables itself while focused drops focus to <body> (outside the dialog):
+  // hand it to the opposite button of the same quantity control first
   const decrease = () => {
     onQty(item.qty - 1)
-    // the minus button is about to disable itself — keep focus on the quantity control
     if (item.qty - 1 <= 1) incRef.current?.focus()
+  }
+  const increase = () => {
+    onQty(Math.min(MAX_QTY, item.qty + 1))
+    if (item.qty + 1 >= MAX_QTY) decRef.current?.focus()
   }
   const swatches = capsule
     ? capsule.pieces.map((pc) => {
@@ -482,7 +492,7 @@ function BagRow({ item, index, reduced, onQty, onRemove, ref }: RowProps & { ref
           <span className="bag-item__sep" aria-hidden>
             ·
           </span>
-          {mtm ? 'Made-to-Measure' : `Size ${item.size}`}
+          {sizeOf(item)}
         </p>
         {mtm && <p className="bag-item__note">Cut to your measurements · kept on file for every order after</p>}
         {capsule && (
@@ -495,6 +505,7 @@ function BagRow({ item, index, reduced, onQty, onRemove, ref }: RowProps & { ref
         <div className="bag-item__actions">
           <div className="bag-qty" role="group" aria-label={`Quantity of ${item.name}`}>
             <button
+              ref={decRef}
               type="button"
               className="bag-qty__btn"
               onClick={decrease}
@@ -512,7 +523,7 @@ function BagRow({ item, index, reduced, onQty, onRemove, ref }: RowProps & { ref
               ref={incRef}
               type="button"
               className="bag-qty__btn"
-              onClick={() => onQty(item.qty + 1)}
+              onClick={increase}
               disabled={item.qty >= MAX_QTY}
               aria-label={`Increase quantity of ${item.name}`}
             >

@@ -15,7 +15,9 @@ import Faq from './Faq'
 import type { BookingPreset, ServiceId } from './data'
 import './Custom.css'
 
-const BAND = ['Made to measure', 'Made to lead', 'Beyond the Silhouette', 'Power in every detail', 'A wardrobe for every chapter']
+/* An even count, always: the band alternates wine / gold by nth-child, and the Marquee repeats the list once — with an
+   odd count the copy would start on the other colour and every phrase would flip colour at the loop seam. */
+const BAND = ['Made to measure', 'Made to lead', 'Beyond the Silhouette', 'Power in every detail', 'Kept on file', 'A wardrobe for every chapter']
 
 const PROGRAMME_NOTE =
   'Programme outline requested — please send the “Dress for the Position You Hold” outline and group pricing for our organisation.'

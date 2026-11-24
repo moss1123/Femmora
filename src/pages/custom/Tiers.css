@@ -94,6 +94,8 @@
   top: -1.1rem;
   left: clamp(1.25rem, 2.2vw, 2.6rem);
   font-size: 0.6rem;
+  /* solid, not foil: at 0.6rem the foil's darkest stop drops under 4:1 on burgundy */
+  color: var(--gold-300);
 }
 
 .cus-tier__head {

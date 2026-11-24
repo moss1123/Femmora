@@ -17,7 +17,7 @@ import './sections/story.css'
  * The house look is burgundy, gold and ivory (Deliverable 3); every visual is drawn
  * (SVG gold-hairline flats, typographic plates, CSS/SVG cloth) — there are no photographs.
  *
- *   I    Beyond the silhouette  wine       pinned · words light up with scroll, the four tenets
+ *   I    The manifesto          wine       pinned · words light up with scroll, the four tenets
  *   II   The double bind        ivory      pinned · two claims collide into "Western structure, modest by design"
  *   III  Four promises          noir       pinned · horizontal gallery of the four differentiators (stacked on mobile)
  *   IV   The looks              parchment  pinned · one trench look grows full-bleed, then four fan out
@@ -26,6 +26,8 @@ import './sections/story.css'
  *   VII  My Femmora, My Story   noir       crossfading carousel of illustrative stories (labelled as such)
  *   VIII The launch             wine       roadmap, Dolmen Mall flagship and the Private List
  *   IX   Choose your chapter    parchment  three trench coats on a rail — one link per page
+ *
+ * Ids, numerals and themes come from CHAPTERS (sections/constants.ts), which the ChapterRail reads.
  *
  * Every section owns its own ScrollTriggers inside useGSAP + gsap.matchMedia, so all pins
  * revert on unmount (route change) and re-create per breakpoint. Sections are rendered in

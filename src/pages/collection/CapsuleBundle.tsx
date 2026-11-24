@@ -80,7 +80,8 @@ export default function CapsuleBundle() {
                 role="tab"
                 id={`col-cap-tab-${c.id}`}
                 aria-selected={i === tab}
-                aria-controls={`col-cap-panel-${c.id}`}
+                // only the selected capsule's panel is mounted — never point at an id that isn't there
+                aria-controls={i === tab ? `col-cap-panel-${c.id}` : undefined}
                 tabIndex={i === tab ? 0 : -1}
                 className="col-cap__tab"
                 onClick={() => setTab(i)}
@@ -174,7 +175,7 @@ function CapsulePanel({ capsule, reduced }: { capsule: Capsule; reduced: boolean
                 <motion.li
                   key={p.id}
                   className={`col-cap__piece ${lit ? 'is-lit' : ''}`}
-                  animate={{ opacity: lit ? 1 : 0.34, y: lit && !reduced ? -6 : 0 }}
+                  animate={{ opacity: lit ? 1 : 0.42, y: lit && !reduced ? -6 : 0 }}
                   transition={{ duration: 0.6, ease: EASE }}
                 >
                   <span className="col-cap__piece-art" aria-hidden style={{ '--d': `${i * 0.08}s` } as CSSProperties}>

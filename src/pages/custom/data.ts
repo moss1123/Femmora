@@ -55,12 +55,13 @@ export const PROCESS = [
   {
     title: 'Consultation',
     body: 'A conversation before any tape comes out: your calendar, your climate, the rooms you walk into — and the formality each one asks for.',
-    meta: 'Day 1 · 45 min',
+    // Day 1 is the 60-minute Made-to-Measure appointment booked below: 30 + 30
+    meta: 'Day 1 · 30 min',
   },
   {
     title: 'Colour analysis & measurements',
     body: 'Your palette read in daylight against the cloth, then measured by hand — with the notes no tape records, like how you sit at a long table.',
-    meta: 'Day 1 · 45 min',
+    meta: 'Day 1 · 30 min',
   },
   {
     title: 'Toile & first fitting',

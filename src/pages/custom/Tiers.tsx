@@ -125,9 +125,7 @@ export default function Tiers({ onBook }: { onBook: (s: ServiceId) => void }) {
               >
                 <header className="cus-tier__head">
                   {signature && (
-                    <p className="cus-tier__badge label-sm">
-                      <span className="gold-text">The signature service</span>
-                    </p>
+                    <p className="cus-tier__badge label-sm">The signature service</p>
                   )}
                   <span className="cus-tier__numeral numeral" aria-hidden>
                     {d.numeral}
