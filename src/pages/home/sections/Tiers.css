@@ -1,0 +1,303 @@
+/* ==========================================================================
+   V — The house tiers  (prefix: hs-tiers / hs-tier)
+   ========================================================================== */
+
+.hs-tiers {
+  position: relative;
+  padding-block: var(--section-y);
+  background: var(--bg);
+  color: var(--fg);
+  overflow-x: clip;
+}
+
+.hs-tiers__head {
+  display: grid;
+  gap: 2rem 4rem;
+  align-items: end;
+}
+.hs-tiers__head-main {
+  display: grid;
+  gap: 1.4rem;
+}
+.hs-tiers__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-h1);
+  line-height: 0.98;
+  letter-spacing: -0.026em;
+  font-variation-settings: 'opsz' 96;
+}
+.hs-tiers__title em {
+  color: var(--accent-strong);
+}
+.hs-tiers__aside {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 28rem;
+}
+.hs-tiers__lead {
+  font-family: var(--font-serif);
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+.hs-tiers__note {
+  line-height: 1.8;
+  color: var(--accent);
+}
+.hs-tiers__note .hs-dia {
+  margin: 0 0.8em 0.12em;
+  vertical-align: middle;
+}
+
+/* — Columns — */
+.hs-tiers__cols {
+  display: grid;
+  margin-top: clamp(3.5rem, 9vh, 6rem);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.hs-tier {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  padding: clamp(2.25rem, 5vh, 3.25rem) 0;
+  transition: background-color 0.8s var(--ease-lux);
+}
+.hs-tier + .hs-tier {
+  border-top: 1px solid var(--line-soft);
+}
+.hs-tier__rule {
+  display: none;
+}
+.hs-tier__sweep {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gold-300);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 1s var(--ease-lux);
+  pointer-events: none;
+}
+.hs-tier:hover .hs-tier__sweep,
+.hs-tier:focus-within .hs-tier__sweep {
+  transform: scaleX(1);
+}
+
+.hs-tier__top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: clamp(5rem, 11vw, 9rem);
+}
+.hs-tier__numeral {
+  display: block;
+  padding-right: 0.15em;
+  font-size: clamp(4.5rem, 9vw, 9rem);
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+  transition: color 0.8s var(--ease-lux), background-position 1.4s var(--ease-lux);
+}
+.hs-tier:not(.hs-tier--mtm):hover .hs-tier__numeral {
+  color: var(--accent-strong);
+}
+.hs-tier--mtm:hover .hs-tier__numeral {
+  background-position: 100% 50%;
+}
+.hs-tier__kicker {
+  padding-bottom: 0.4rem;
+  text-align: right;
+  color: var(--fg-muted);
+}
+
+.hs-tier__name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.85rem, 2.6vw, 2.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.hs-tier__audience {
+  margin-top: -0.6rem;
+  color: var(--accent);
+}
+.hs-tier__pricing {
+  display: grid;
+  gap: 0.45rem;
+}
+.hs-tier__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.75rem;
+}
+.hs-tier__note {
+  max-width: 22rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--fg-muted);
+}
+.hs-tier__from {
+  color: var(--fg-muted);
+}
+.hs-tier__amount {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.55rem, 2.1vw, 2.15rem);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--accent-strong);
+}
+.hs-tier__blurb {
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--fg-muted);
+}
+
+.hs-tier__includes > p {
+  padding-bottom: 0.75rem;
+  color: var(--fg-muted);
+  border-bottom: 1px solid var(--line-soft);
+}
+.hs-tier__list li {
+  position: relative;
+  padding: 0.7rem 0 0.7rem 1.35rem;
+  font-size: 1.08rem;
+  line-height: 1.4;
+  border-bottom: 1px solid var(--line-soft);
+}
+.hs-tier__list li::before {
+  content: '';
+  position: absolute;
+  left: 0.15rem;
+  top: 1.18rem;
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  transform: rotate(45deg);
+}
+
+.hs-tier__for {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.14rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+.hs-tier__cta {
+  padding-top: 0.25rem;
+}
+
+/* The signature tier — foil numeral and a persistent gold crown line */
+.hs-tier--mtm .hs-tier__numeral {
+  background: var(--gold-gradient);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hs-tier--mtm::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accent);
+}
+.hs-tier--mtm .hs-tier__kicker {
+  color: var(--accent);
+}
+
+/* — Also from the house: bundles and corporate programmes — */
+.hs-tiers__also {
+  display: grid;
+  gap: 1.5rem 3rem;
+  margin: clamp(2rem, 5vh, 3rem) 0 0;
+}
+.hs-tiers__also-item {
+  display: grid;
+  gap: 0.55rem;
+  max-width: 34rem;
+}
+.hs-tiers__also-item dt {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--accent);
+}
+.hs-tiers__also-item dt::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: currentColor;
+  transform: rotate(45deg);
+}
+.hs-tiers__also-item dd {
+  margin: 0;
+  padding-left: calc(5px + 0.8rem);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--fg-muted);
+}
+
+@media (min-width: 900px) {
+  .hs-tiers__also {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .hs-tiers__head {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  }
+  .hs-tiers__aside {
+    justify-self: end;
+  }
+  .hs-tiers__cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .hs-tier {
+    min-height: clamp(38rem, 84vh, 50rem);
+    padding: clamp(2.25rem, 5vh, 3.25rem) clamp(1.25rem, 2.6vw, 2.9rem);
+  }
+  .hs-tier + .hs-tier {
+    border-top: 0;
+  }
+  .hs-tier:first-child {
+    padding-left: 0;
+  }
+  .hs-tier:last-child {
+    padding-right: 0;
+  }
+  .hs-tier:hover {
+    background-color: var(--bg-elev);
+  }
+  .hs-tier:first-child:hover,
+  .hs-tier:last-child:hover {
+    background-color: transparent;
+  }
+  .hs-tier__rule {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 1px;
+    background: var(--line);
+    transform-origin: 50% 0;
+  }
+  .hs-tier--mtm {
+    background-color: var(--bg-elev);
+  }
+}

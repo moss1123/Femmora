@@ -1,0 +1,66 @@
+/* Formality meter (prefix col-fm) — four hairline bars, rising like a scale. */
+.col-fm {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--fg-muted);
+}
+.col-fm__bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 12px;
+}
+.col-fm__bar {
+  width: 3px;
+  background: var(--line);
+  transition: background-color 0.5s var(--ease-lux);
+}
+.col-fm__bar:nth-child(1) {
+  height: 40%;
+}
+.col-fm__bar:nth-child(2) {
+  height: 60%;
+}
+.col-fm__bar:nth-child(3) {
+  height: 80%;
+}
+.col-fm__bar:nth-child(4) {
+  height: 100%;
+}
+.col-fm__bar.is-on {
+  background: var(--accent);
+}
+.col-fm__text {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  white-space: nowrap;
+}
+.col-fm__n {
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  color: var(--accent);
+}
+.col-fm__label {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 450;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.col-fm--lg .col-fm__bars {
+  height: 18px;
+  gap: 4px;
+}
+.col-fm--lg .col-fm__bar {
+  width: 4px;
+}
+.col-fm--lg .col-fm__n {
+  font-size: 1.35rem;
+}
+.col-fm--lg .col-fm__label {
+  font-size: 0.66rem;
+  color: var(--fg);
+}

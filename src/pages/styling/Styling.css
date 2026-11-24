@@ -1,0 +1,168 @@
+/* ==========================================================================
+   STYLING — shared page styles  (prefix: sty-)
+   House look: burgundy + gold + ivory. Page root, section headers, line-art
+   flats, ink swatches, hidden radios, fabric textures.
+   ========================================================================== */
+
+.sty {
+  overflow-x: clip;
+}
+
+/* Gold that passes WCAG AA as small text on light paper.
+   Ivory: gold-700 = 4.6:1 on ivory-200 · Parchment needs one shade deeper (5.2:1). */
+.sty[data-theme='ivory'],
+.sty [data-theme='ivory'] {
+  --accent: var(--gold-700);
+  --accent-strong: var(--gold-700);
+}
+.sty [data-theme='parchment'] {
+  --accent: #6f5522;
+  --accent-strong: var(--wine-800);
+}
+
+/* — Emphasis inside display titles: solid gold on light paper, foil on burgundy — */
+.sty-em {
+  color: var(--accent-strong);
+  padding-right: 0.06em; /* italic overhang */
+}
+.sty [data-theme='parchment'] .sty-em {
+  color: var(--gold-700); /* display size: 3.9:1 is AA for large text, and reads as gold */
+}
+[data-theme='wine'] .sty-em,
+[data-theme='noir'] .sty-em {
+  background: var(--gold-gradient);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ==========================================================================
+   Section header
+   ========================================================================== */
+.sty-head {
+  display: grid;
+  gap: clamp(1.1rem, 2.6vh, 1.75rem);
+  margin-bottom: clamp(3rem, 8vh, 5.5rem);
+}
+.sty-head__title .h1 {
+  max-width: 15ch;
+  padding-right: 0.08em;
+}
+.sty-head__lead {
+  max-width: 34rem;
+}
+
+@media (min-width: 1024px) {
+  .sty-head--wide {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(1rem, 2vw, 2rem);
+    align-items: end;
+  }
+  .sty-head--wide .sty-head__eyebrow {
+    grid-column: 1 / -1;
+  }
+  .sty-head--wide .sty-head__title {
+    grid-column: 1 / 8;
+  }
+  .sty-head--wide .sty-head__lead {
+    grid-column: 8 / 13;
+    padding-bottom: 0.6rem;
+  }
+}
+
+.sty-head--center {
+  justify-items: center;
+  text-align: center;
+}
+.sty-head--center .sty-head__title .h1 {
+  max-width: 18ch;
+  margin-inline: auto;
+}
+.sty-head--center .sty-head__lead {
+  margin-inline: auto;
+}
+
+/* ==========================================================================
+   Technical flats (SVG gold hairline drawings)
+   ========================================================================== */
+.sty-flat {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: var(--accent);
+  overflow: visible;
+}
+.sty-flat__detail {
+  stroke-opacity: 0.72;
+}
+
+/* ==========================================================================
+   InkWipe — colour block that changes with a clip-path wipe
+   ========================================================================== */
+.sty-ink {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  isolation: isolate;
+}
+.sty-ink__layer {
+  position: absolute;
+  inset: 0;
+}
+.sty-ink::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px var(--line-soft);
+  border-radius: inherit;
+}
+
+/* ==========================================================================
+   Fabric textures (pure CSS, no imagery)
+   ========================================================================== */
+/* Gabardine: a steep, fine twill */
+.sty-twill {
+  background-image: repeating-linear-gradient(
+    118deg,
+    rgba(132, 102, 46, 0.075) 0 1px,
+    transparent 1px 4px
+  );
+}
+/* Damask-like woven ground: two crossing hairline diagonals (.section resets background, so match its specificity) */
+.sty-weave,
+.section.sty-weave {
+  background-image:
+    repeating-linear-gradient(45deg, rgba(201, 165, 92, 0.06) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(-45deg, rgba(201, 165, 92, 0.06) 0 1px, transparent 1px 9px);
+}
+
+/* ==========================================================================
+   Visually hidden native radios (labels are the visual control)
+   ========================================================================== */
+.sty-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  clip-path: inset(50%);
+}
+label:has(> .sty-radio:focus-visible) {
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Small diamond used as a list bullet throughout the page */
+.sty-diamond {
+  display: inline-block;
+  flex: none;
+  width: 0.42rem;
+  height: 0.42rem;
+  background: var(--accent);
+  transform: rotate(45deg);
+}

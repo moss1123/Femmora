@@ -1,0 +1,535 @@
+/* ==========================================================================
+   I — Styling hero  (prefix: sty-hero)
+   Background must stay exactly var(--ivory-200) / #f3ede2 — it is the colour
+   the Ivory Trench floods the screen with on the home rack, so the hand-off
+   is seamless.
+   ========================================================================== */
+
+.sty-hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-top: calc(var(--nav-h) + clamp(1.25rem, 5vh, 3.5rem));
+  padding-bottom: clamp(4.5rem, 11vh, 7.5rem);
+  background: var(--ivory-200);
+  color: var(--fg);
+  overflow: clip;
+}
+
+/* Atelier pattern-paper: two faint vertical hairlines, like a cutting table */
+.sty-hero::before,
+.sty-hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line-soft);
+  pointer-events: none;
+}
+.sty-hero::before {
+  left: calc(var(--gutter) * 0.5);
+}
+.sty-hero::after {
+  right: calc(var(--gutter) * 0.5);
+}
+
+.sty-hero__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'meta'
+    'title'
+    'figure'
+    'intro'
+    'index';
+  row-gap: clamp(2rem, 5vh, 3rem);
+}
+
+/* — Meta row — */
+.sty-hero__meta {
+  grid-area: meta;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--accent);
+}
+.sty-hero__num {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+.sty-hero__tick {
+  width: 2.75rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+}
+.sty-hero__meta-r {
+  display: none;
+}
+
+/* — Title — */
+.sty-hero__title {
+  grid-area: title;
+  position: relative;
+  z-index: 3;
+  margin: 0;
+  font-weight: 400;
+}
+.sty-hero__word {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin-left: -0.04em;
+  padding-right: 0.14em; /* italic overhang */
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(5.25rem, 25vw, 17.5rem);
+  line-height: 0.84;
+  letter-spacing: -0.045em;
+  font-variation-settings: 'opsz' 96;
+  color: var(--fg);
+  will-change: transform;
+}
+.sty-hero__char {
+  will-change: transform, filter, opacity;
+}
+.sty-hero__sub {
+  display: block;
+  max-width: 17ch;
+  /* clear the descenders of the giant italic "Styling" (line-height 0.84) */
+  margin-top: clamp(1.75rem, 4.2vw, 4.25rem);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.55rem, 2.6vw, 2.55rem);
+  line-height: 1.12;
+  letter-spacing: -0.005em;
+  color: var(--fg-muted);
+}
+.sty-hero__sub-em {
+  color: var(--accent-strong);
+}
+
+/* — Figure: the Ivory Trench on a hanger, inside a gabardine arch — */
+.sty-hero__figure {
+  grid-area: figure;
+  position: relative;
+  justify-self: end;
+  width: min(80%, 24rem);
+  margin: 0;
+  margin-top: -1.5rem;
+  will-change: transform;
+}
+.sty-hero__archline {
+  position: absolute;
+  inset: -0.9rem 0.9rem 2.6rem -0.9rem;
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  pointer-events: none;
+}
+.sty-hero__arch {
+  position: relative;
+  aspect-ratio: 37 / 50;
+  border-radius: 999px 999px 0 0;
+  overflow: hidden;
+  background-color: var(--ivory-300);
+  isolation: isolate;
+}
+.sty-hero__arch-inner {
+  position: absolute;
+  inset: 0;
+}
+/* a cutting-table chalk line down the centre, and a faint floor line under the hem */
+.sty-hero__arch-inner::before,
+.sty-hero__arch-inner::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+.sty-hero__arch-inner::before {
+  top: 9%;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: repeating-linear-gradient(180deg, var(--line-soft) 0 6px, transparent 6px 12px);
+}
+.sty-hero__arch-inner::after {
+  left: 12%;
+  right: 12%;
+  bottom: 12%;
+  height: 1px;
+  background: var(--line);
+}
+.sty-hero__arch::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px var(--line-soft);
+}
+
+/* The drawing sheet: coat, hanger and annotations share the flat's 240 × 380 grid */
+.sty-hero__art {
+  position: absolute;
+  left: 22%;
+  top: 19%;
+  width: 56%;
+  aspect-ratio: 240 / 380;
+  color: var(--accent);
+  transform-origin: 50% 0%;
+  will-change: transform;
+}
+.sty-hero__art > * {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.sty-hero__sheet {
+  overflow: visible;
+  pointer-events: none;
+}
+.sty-hero__sheet--back {
+  z-index: 0;
+}
+.sty-hero__trench {
+  z-index: 1;
+}
+.sty-hero__sheet--front {
+  z-index: 2;
+}
+.sty-hero__dim {
+  fill: currentColor;
+  font-family: var(--font-sans);
+  font-size: 6.4px;
+  font-weight: 450;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+.sty-hero__pin circle {
+  fill: var(--ivory-50);
+  stroke: currentColor;
+  stroke-width: 0.85;
+}
+.sty-hero__pin text {
+  fill: var(--wine-900);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 8px;
+}
+
+/* Rotating seal */
+.sty-hero__seal {
+  position: absolute;
+  z-index: 4;
+  left: -3rem;
+  bottom: 18%;
+  width: clamp(5.75rem, 9vw, 8.25rem);
+  height: auto;
+  color: var(--accent-strong);
+  background: var(--ivory-50);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--line-soft);
+}
+.sty-hero__seal text {
+  fill: currentColor;
+  font-family: var(--font-sans);
+  font-size: 7.1px;
+  font-weight: 450;
+  letter-spacing: 0.24em;
+}
+.sty-hero__seal-num {
+  font-family: var(--font-display) !important;
+  font-style: italic;
+  font-size: 30px !important;
+  letter-spacing: 0 !important;
+}
+.sty-hero__seal-spin {
+  transform-origin: 60px 60px;
+  animation: sty-spin 38s linear infinite;
+}
+@keyframes sty-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sty-hero__cap {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1rem;
+  color: var(--fg-muted);
+}
+.sty-hero__cap-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+}
+.sty-hero__cap .numeral {
+  flex: none;
+  color: var(--accent);
+  font-size: 1.05rem;
+}
+.sty-hero__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.1rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+.sty-hero__legend li {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+.sty-hero__legend .numeral {
+  font-size: 0.95rem;
+}
+
+/* — Intro copy — */
+.sty-hero__intro {
+  grid-area: intro;
+  max-width: 31rem;
+}
+.sty-hero__rule {
+  display: block;
+  width: 4.5rem;
+  height: 1px;
+  margin-bottom: 1.6rem;
+  background: var(--accent);
+  transform-origin: left center;
+}
+.sty-hero__lead {
+  color: var(--fg);
+  font-style: italic;
+}
+.sty-hero__body {
+  margin-top: 1.1rem;
+}
+
+/* — On-page index — */
+.sty-hero__index {
+  grid-area: index;
+}
+.sty-hero__index-label {
+  margin-bottom: 0.9rem;
+  color: var(--accent);
+}
+.sty-hero__index ol {
+  border-bottom: 1px solid var(--line-soft);
+}
+.sty-hero__index li {
+  border-top: 1px solid var(--line-soft);
+}
+.sty-hero__index a {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3.1rem;
+  padding-block: 0.55rem;
+}
+.sty-hero__index a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.7s var(--ease-lux);
+}
+.sty-hero__index .numeral {
+  color: var(--accent);
+  font-size: 0.98rem;
+}
+.sty-hero__index-title {
+  font-family: var(--font-serif);
+  font-size: 1.14rem;
+  line-height: 1.25;
+  transition: transform 0.6s var(--ease-lux), color 0.4s;
+}
+.sty-hero__index-arrow {
+  width: 1.5rem;
+  height: 0.55rem;
+  color: var(--accent);
+  opacity: 0.55;
+  transition: transform 0.6s var(--ease-lux), opacity 0.4s;
+}
+@media (hover: hover) {
+  .sty-hero__index a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+  .sty-hero__index a:hover .sty-hero__index-title {
+    transform: translateX(0.4rem);
+    font-style: italic;
+  }
+  .sty-hero__index a:hover .sty-hero__index-arrow {
+    transform: translateX(0.3rem);
+    opacity: 1;
+  }
+}
+
+/* — Scroll cue — */
+.sty-hero__scroll {
+  position: absolute;
+  right: var(--gutter);
+  bottom: clamp(1.25rem, 3.5vh, 2.25rem);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--fg-muted);
+}
+.sty-hero__scroll .label-sm {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.sty-hero__scroll-line {
+  position: relative;
+  width: 1px;
+  height: 3.5rem;
+  overflow: hidden;
+  background: var(--line-soft);
+}
+.sty-hero__scroll-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: translateY(-100%);
+  animation: sty-drip 2.6s var(--ease-silk) infinite;
+}
+@keyframes sty-drip {
+  0% {
+    transform: translateY(-100%);
+  }
+  55% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Phones: the coat is drawn a size up (hook, arms and dimension lines still clear the arch's curve),
+   and the dimension words — ~4 px at this scale — give way to the legend in the caption. */
+@media (max-width: 639px) {
+  .sty-hero__art {
+    left: 19%;
+    top: 16%;
+    width: 62%;
+  }
+  .sty-hero__dim {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Tablet
+   ========================================================================== */
+@media (min-width: 640px) {
+  .sty-hero__figure {
+    width: min(62%, 25rem);
+  }
+  .sty-hero__seal {
+    left: -3.75rem;
+  }
+}
+
+/* ==========================================================================
+   Desktop — editorial asymmetry: the word runs into the arch
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .sty-hero__grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-areas: none;
+    grid-template-rows: auto auto auto 1fr;
+    column-gap: clamp(1rem, 2vw, 2rem);
+    row-gap: 0;
+  }
+  .sty-hero__meta {
+    grid-area: 1 / 1 / 2 / 6;
+  }
+  .sty-hero__meta-r {
+    grid-area: 1 / 9 / 2 / 13;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.35rem;
+    text-align: right;
+    color: var(--fg-muted);
+  }
+  .sty-hero__meta-r .label-sm {
+    color: var(--accent);
+  }
+  .sty-hero__meta-note {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.05rem;
+  }
+  .sty-hero__title {
+    grid-area: 2 / 1 / 3 / 11;
+    margin-top: clamp(1.5rem, 5vh, 3.5rem);
+  }
+  .sty-hero__word {
+    font-size: clamp(9rem, 17.5vw, 17.5rem);
+  }
+  .sty-hero__sub {
+    margin-left: 0.35em;
+  }
+  .sty-hero__figure {
+    grid-area: 2 / 8 / 5 / 13;
+    align-self: start;
+    justify-self: end;
+    width: 88%;
+    max-width: 30rem;
+    margin-top: clamp(2.5rem, 7vh, 4.5rem);
+  }
+  .sty-hero__seal {
+    left: -4.25rem;
+  }
+  .sty-hero__intro {
+    grid-area: 3 / 1 / 4 / 6;
+    margin-top: clamp(2.5rem, 7vh, 4.5rem);
+  }
+  .sty-hero__index {
+    grid-area: 4 / 1 / 5 / 8;
+    align-self: start;
+    margin-top: clamp(2.5rem, 6vh, 3.5rem);
+    max-width: 34rem;
+  }
+  .sty-hero__scroll {
+    display: flex;
+  }
+}
+
+@media (min-width: 1280px) {
+  .sty-hero__intro {
+    grid-area: 3 / 1 / 4 / 5;
+  }
+  .sty-hero__index {
+    grid-area: 3 / 5 / 4 / 8;
+    margin-top: clamp(2.5rem, 7vh, 4.5rem);
+    padding-left: clamp(0.5rem, 1.5vw, 1.5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sty-hero__seal-spin,
+  .sty-hero__scroll-line::after {
+    animation: none;
+  }
+}

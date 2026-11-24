@@ -1,0 +1,75 @@
+/* GarmentFlat — SVG technical flats (prefix col-gf)
+   Set --gf-delay on any ancestor to stagger the draw-on (e.g. three coats on one rail). */
+.col-gf {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.col-gf__hang {
+  transform-box: view-box;
+  transform-origin: 150px 18px;
+}
+
+/* Draw-on: hidden until `draw` flips true, then lines draw and the cloth fades in. */
+.col-gf--pre .col-gf__ink,
+.col-gf--draw .col-gf__ink {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.col-gf--pre .col-gf__fill,
+.col-gf--pre .col-gf__stitch {
+  opacity: 0;
+}
+.col-gf--draw .col-gf__ink {
+  animation: col-gf-draw 2.4s var(--ease-silk) var(--gf-delay, 0s) forwards;
+}
+.col-gf--draw .col-gf__hanger .col-gf__ink {
+  animation-duration: 1.4s;
+}
+.col-gf--draw .col-gf__fill {
+  animation: col-gf-fade 1.6s var(--ease-lux) calc(1s + var(--gf-delay, 0s)) both;
+}
+.col-gf--draw .col-gf__stitch {
+  animation: col-gf-fade 1.2s var(--ease-lux) calc(1.8s + var(--gf-delay, 0s)) both;
+}
+
+/* fabric swatch */
+.col-gf-swatch {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.col-gf-swatch path,
+.col-gf-swatch circle {
+  transition: fill 0.7s var(--ease-lux);
+}
+
+@keyframes col-gf-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes col-gf-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .col-gf--pre .col-gf__ink,
+  .col-gf--draw .col-gf__ink {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+  .col-gf--pre .col-gf__fill,
+  .col-gf--pre .col-gf__stitch,
+  .col-gf--draw .col-gf__fill,
+  .col-gf--draw .col-gf__stitch {
+    opacity: 1;
+    animation: none;
+  }
+}

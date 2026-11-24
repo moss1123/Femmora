@@ -1,0 +1,224 @@
+/* ==========================================================================
+   I — Manifesto  (prefix: hs-manifesto)
+   ========================================================================== */
+
+.hs-manifesto {
+  position: relative;
+  color: var(--fg);
+  /* transparent at the very top so the rack shows through the feathered edge */
+  background: transparent;
+}
+
+/* Feathered edge: the WebGL rack dissolves into burgundy as the story rises over it. */
+.hs-manifesto__edge {
+  height: clamp(7rem, 24vh, 15rem);
+  background: linear-gradient(
+    to bottom,
+    rgba(42, 10, 18, 0) 0%,
+    rgba(42, 10, 18, 0.42) 38%,
+    rgba(42, 10, 18, 0.86) 72%,
+    var(--bg) 100%
+  );
+  pointer-events: none;
+}
+
+.hs-manifesto__stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: calc(var(--nav-h) + 1.5rem) clamp(3rem, 8vh, 5rem);
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* The gold horizon — drawn from the centre on entrance */
+.hs-manifesto__horizon {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-500) 18%, var(--gold-200) 50%, var(--gold-500) 82%, transparent);
+  transform-origin: 50% 50%;
+}
+
+.hs-manifesto__inner {
+  position: relative;
+  display: grid;
+  gap: clamp(2.5rem, 7vh, 5rem);
+}
+
+.hs-manifesto__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+}
+.hs-manifesto__est {
+  color: var(--fg-muted);
+}
+.hs-manifesto__est span {
+  margin-inline: 0.5em;
+  color: var(--accent);
+}
+
+.hs-manifesto__statement {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.35rem, 6vw, 6.7rem);
+  line-height: 1.02;
+  letter-spacing: -0.028em;
+  font-variation-settings: 'opsz' 96;
+  color: var(--fg);
+  text-wrap: balance;
+}
+.hs-manifesto__line {
+  display: block;
+}
+.hs-manifesto__line--2 {
+  padding-left: 9%;
+}
+.hs-manifesto__line--3 {
+  padding-left: 18%;
+}
+.hs-manifesto__key {
+  color: var(--accent-strong);
+}
+.hs-manifesto__word {
+  will-change: opacity, filter;
+}
+
+/* Foot: the promise + four tenets (left), the persona quote (right) */
+.hs-manifesto__foot {
+  display: grid;
+  gap: clamp(2rem, 5vh, 3rem) clamp(2rem, 5vw, 5rem);
+  align-items: end;
+}
+.hs-manifesto__creed {
+  display: grid;
+  gap: 1.35rem;
+  max-width: 40rem;
+}
+.hs-manifesto__promise {
+  font-family: var(--font-serif);
+  font-size: var(--fs-lead);
+  line-height: 1.4;
+  color: var(--fg-muted);
+}
+.hs-manifesto__promise em {
+  color: var(--fg);
+}
+.hs-manifesto__tenets {
+  display: grid;
+  gap: 0.8rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line-soft);
+}
+.hs-manifesto__tenets-label {
+  color: var(--accent);
+}
+.hs-manifesto__tenet-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.6rem;
+}
+.hs-manifesto__tenet {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55rem;
+}
+.hs-manifesto__tenet-n {
+  min-width: 1.6em;
+  font-size: 1rem;
+  color: var(--accent);
+}
+.hs-manifesto__tenet-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.35vw, 1.3rem);
+  line-height: 1.2;
+  color: var(--fg);
+}
+
+/* Persona quote — offset right of the creed for editorial asymmetry */
+.hs-manifesto__quote {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: clamp(1rem, 2.4vw, 2rem);
+  width: min(100%, 38rem);
+  margin-left: auto;
+}
+.hs-manifesto__quote-rule {
+  align-self: start;
+  width: clamp(2.5rem, 6vw, 5rem);
+  height: 1px;
+  margin-top: 0.95em;
+  background: var(--accent);
+  transform-origin: 0 50%;
+}
+.hs-manifesto__quote blockquote p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.3rem, 1.85vw, 1.85rem);
+  line-height: 1.36;
+  color: var(--fg);
+}
+.hs-manifesto__quote figcaption {
+  grid-column: 2;
+  margin-top: 1.1rem;
+  line-height: 1.7;
+  color: var(--accent);
+}
+
+.hs-manifesto__vertical {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: max(0.9rem, calc(var(--gutter) * 0.32));
+  display: none;
+  align-items: center;
+  gap: 1.1rem;
+  writing-mode: vertical-rl;
+  color: var(--fg-faint);
+  pointer-events: none;
+}
+.hs-manifesto__vertical-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  transform: rotate(45deg);
+}
+
+@media (min-width: 900px) {
+  .hs-manifesto__foot {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hs-manifesto__vertical {
+    display: flex;
+  }
+}
+
+/*
+ * Pinned stage: the whole composition must fit one viewport, so this chapter pins on a
+ * slightly taller query than MQ.pin (mirrors PIN in Manifesto.tsx). Elsewhere it flows.
+ */
+@media (min-width: 900px) and (min-height: 640px) and (prefers-reduced-motion: no-preference),
+  (min-width: 768px) and (min-height: 720px) and (prefers-reduced-motion: no-preference) {
+  .hs-manifesto__stage {
+    height: 100svh;
+    min-height: 0;
+  }
+  .hs-manifesto__inner {
+    gap: clamp(1.25rem, 5.5vh, 4rem);
+  }
+  .hs-manifesto__statement {
+    font-size: clamp(2.1rem, min(6vw, 10.5vh), 6.7rem);
+  }
+  .hs-manifesto__quote blockquote p {
+    font-size: clamp(1.15rem, min(1.85vw, 3vh), 1.85rem);
+  }
+}

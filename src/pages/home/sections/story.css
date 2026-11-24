@@ -1,0 +1,32 @@
+/* ==========================================================================
+   Home story — shared scope  (prefix: hs)
+   ========================================================================== */
+
+.hs {
+  position: relative;
+  overflow-x: clip;
+}
+
+/*
+ * Gold on light grounds. The global gold-600 accent on ivory measures ~2.9:1 and gold-700
+ * on parchment ~3.9:1 — too faint for the small tracked labels this story uses. Inside the
+ * story only, light themes take a deeper antique gold that clears WCAG AA (4.5:1) for text.
+ */
+.hs [data-theme='ivory'] {
+  --accent: var(--gold-700);
+  --accent-strong: var(--wine-700);
+}
+.hs [data-theme='parchment'] {
+  --accent: color-mix(in srgb, var(--gold-700) 82%, var(--wine-900));
+  --accent-strong: var(--wine-700);
+}
+
+/* Burgundy house stamp: a small rotated gold diamond, used as a list bullet / separator */
+.hs-dia {
+  display: inline-block;
+  flex: none;
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  transform: rotate(45deg);
+}

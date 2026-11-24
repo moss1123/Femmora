@@ -1,0 +1,394 @@
+/* ==========================================================================
+   IX — Choose your chapter  (prefix: hs-fin / hs-flat)
+   ========================================================================== */
+
+.hs-fin {
+  position: relative;
+  padding-block: var(--section-y) clamp(4.5rem, 11vh, 8rem);
+  background: var(--bg);
+  color: var(--fg);
+  overflow-x: clip;
+}
+
+/* — Head — */
+.hs-fin__head {
+  display: grid;
+  gap: 2rem 4rem;
+  align-items: end;
+}
+.hs-fin__head-main {
+  display: grid;
+  gap: 1.4rem;
+}
+.hs-fin__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-hero);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  font-variation-settings: 'opsz' 96;
+}
+.hs-fin__title em {
+  color: var(--accent);
+}
+.hs-fin__lead {
+  max-width: 26rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+
+/* — The rack — */
+.hs-fin__rack {
+  /* garment height, and the top padding above it; the rail sits on the hook's crown */
+  --g-h: clamp(9.5rem, 30vw, 12rem);
+  --pad: 1.25rem;
+  position: relative;
+  margin-top: clamp(3.5rem, 9vh, 6rem);
+}
+.hs-fin__rail {
+  display: none;
+}
+
+.hs-fin__list {
+  display: grid;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.hs-fin__item + .hs-fin__item {
+  border-top: 1px solid var(--line-soft);
+}
+
+.hs-fin__link {
+  /* colours flip to ivory-on-burgundy when the ink rises */
+  --fin-fg: var(--fg);
+  --fin-muted: var(--fg-muted);
+  --fin-faint: var(--fg-faint);
+  --fin-accent: var(--accent);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'meta flat'
+    'name flat'
+    'kicker flat'
+    'line line'
+    'foot foot';
+  column-gap: 1.25rem;
+  row-gap: 0.55rem;
+  padding: var(--pad) 0 1.6rem;
+  color: var(--fin-fg);
+  isolation: isolate;
+  outline-offset: -6px;
+  -webkit-tap-highlight-color: transparent;
+}
+.hs-fin__ink {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--wine-900);
+  clip-path: inset(100% 0% 0% 0%);
+  transition: clip-path 0.9s var(--ease-lux);
+  pointer-events: none;
+}
+
+.hs-fin__drop {
+  grid-area: flat;
+  display: block;
+  align-self: start;
+  transform-origin: 50% 2.4%;
+}
+.hs-fin__swing {
+  display: block;
+  transform-origin: 50% 2.4%;
+}
+.hs-fin__flat {
+  display: block;
+  width: auto;
+  height: var(--g-h);
+  color: var(--fin-accent);
+  overflow: visible;
+  transform-origin: 50% 2.4%;
+  transition: transform 1s var(--ease-lux), color 0.6s var(--ease-lux);
+}
+.hs-flat * {
+  vector-effect: non-scaling-stroke;
+}
+.hs-flat__tag {
+  font-family: var(--font-sans);
+}
+
+.hs-fin__meta {
+  grid-area: meta;
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  align-self: end;
+}
+.hs-fin__num {
+  font-size: clamp(2.6rem, 9vw, 3.4rem);
+  line-height: 0.9;
+  padding-right: 0.12em;
+  /* antique foil for the parchment ground — its brightest stop still clears 3:1 for large text;
+     the bright house foil takes over once the burgundy ink rises (hover / focus) */
+  background: linear-gradient(115deg, #5e4519 0%, #84662e 24%, #94733a 46%, #84662e 64%, #6a4f20 82%, #8a6a2f 100%);
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: background-position 1.4s var(--ease-lux);
+}
+.hs-fin__chapter {
+  color: var(--fin-muted);
+  transition: color 0.6s var(--ease-lux);
+}
+.hs-fin__name {
+  grid-area: name;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(2.3rem, 9vw, 3.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.026em;
+  font-variation-settings: 'opsz' 96;
+  transition: transform 0.9s var(--ease-lux);
+}
+.hs-fin__kicker {
+  grid-area: kicker;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.35;
+  color: var(--fin-accent);
+  transition: color 0.6s var(--ease-lux);
+}
+.hs-fin__line {
+  grid-area: line;
+  max-width: 28rem;
+  margin-top: 0.5rem;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--fin-muted);
+  transition: color 0.6s var(--ease-lux);
+}
+.hs-fin__foot {
+  grid-area: foot;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-top: 0.9rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line-soft);
+}
+.hs-fin__garment {
+  color: var(--fin-muted);
+  line-height: 1.7;
+  transition: color 0.6s var(--ease-lux);
+}
+.hs-fin__enter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-height: 44px;
+  color: var(--fin-fg);
+}
+.hs-fin__enter svg {
+  width: 2.5rem;
+  color: var(--fin-accent);
+  transition: transform 0.7s var(--ease-lux);
+}
+
+/* Hover / keyboard focus — the ink rises, the garment lifts off its hanger */
+@media (hover: hover) {
+  .hs-fin__link:hover .hs-fin__ink,
+  .hs-fin__link:focus-visible .hs-fin__ink {
+    clip-path: inset(0% 0% 0% 0%);
+  }
+  .hs-fin__link:hover,
+  .hs-fin__link:focus-visible {
+    --fin-fg: var(--ivory-100);
+    --fin-muted: rgba(248, 244, 236, 0.72);
+    --fin-faint: rgba(248, 244, 236, 0.46);
+    --fin-accent: var(--gold-300);
+  }
+  .hs-fin__link:hover .hs-fin__flat,
+  .hs-fin__link:focus-visible .hs-fin__flat {
+    transform: translateY(-0.9rem) rotate(-1.6deg);
+  }
+  .hs-fin__link:hover .hs-fin__num,
+  .hs-fin__link:focus-visible .hs-fin__num {
+    background-image: var(--gold-gradient);
+    background-position: 100% 50%;
+  }
+  .hs-fin__link:hover .hs-fin__name,
+  .hs-fin__link:focus-visible .hs-fin__name {
+    transform: translateX(0.45rem);
+  }
+  .hs-fin__link:hover .hs-fin__enter svg,
+  .hs-fin__link:focus-visible .hs-fin__enter svg {
+    transform: translateX(0.55rem);
+  }
+}
+.hs-fin__link,
+.hs-fin__enter {
+  transition: color 0.6s var(--ease-lux);
+}
+.hs-fin__link:active .hs-fin__flat {
+  transform: translateY(-1.4rem) rotate(-2deg) scale(0.98);
+}
+
+/* — Coda — */
+.hs-fin__coda {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.75rem 3rem;
+  margin-top: clamp(3rem, 8vh, 5rem);
+}
+.hs-fin__coda-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.45rem, 2.4vw, 2.2rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+.hs-fin__coda-text em {
+  color: var(--accent);
+}
+.hs-fin__coda-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+}
+.hs-fin__top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-height: 44px;
+  color: var(--fg-muted);
+  transition: color 0.5s var(--ease-lux);
+}
+.hs-fin__top svg {
+  height: 1.6rem;
+  width: auto;
+  color: var(--accent);
+  transition: transform 0.6s var(--ease-lux);
+}
+.hs-fin__top:hover,
+.hs-fin__top:focus-visible {
+  color: var(--fg);
+}
+.hs-fin__top:hover svg,
+.hs-fin__top:focus-visible svg {
+  transform: translateY(-0.35rem);
+}
+
+/* ==========================================================================
+   Desktop — three tall columns hanging from one rail
+   ========================================================================== */
+@media (min-width: 900px) {
+  .hs-fin__head {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  }
+  .hs-fin__lead {
+    justify-self: end;
+  }
+
+  .hs-fin__rack {
+    --g-h: clamp(15rem, 36vh, 23rem);
+    --pad: clamp(2.25rem, 6vh, 4rem);
+  }
+  .hs-fin__rail {
+    position: absolute;
+    z-index: 3;
+    left: -0.5rem;
+    right: -0.5rem;
+    /* the hook's crown is at y = 7 / 300 of the garment */
+    top: calc(var(--pad) + var(--g-h) * 0.0233 - 1px);
+    display: block;
+    height: 2px;
+    background: var(--gold-gradient);
+    background-size: 200% 100%;
+    transform-origin: 0 50%;
+    pointer-events: none;
+  }
+  .hs-fin__finial {
+    position: absolute;
+    top: 50%;
+    width: 11px;
+    height: 11px;
+    margin-top: -5.5px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    background: var(--bg);
+  }
+  .hs-fin__finial--l {
+    left: -11px;
+  }
+  .hs-fin__finial--r {
+    right: -11px;
+  }
+
+  .hs-fin__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 0;
+  }
+  .hs-fin__item + .hs-fin__item {
+    border-top: 0;
+    border-left: 1px solid var(--line-soft);
+  }
+
+  .hs-fin__link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    min-height: clamp(36rem, 86vh, 52rem);
+    height: 100%;
+    padding: var(--pad) clamp(1.25rem, 2.6vw, 2.75rem) clamp(1.75rem, 4vh, 2.5rem);
+  }
+  .hs-fin__drop {
+    align-self: center;
+    margin-bottom: clamp(2rem, 5vh, 3.5rem);
+  }
+  .hs-fin__meta {
+    margin-top: auto;
+    align-self: stretch;
+  }
+  .hs-fin__num {
+    font-size: clamp(3.4rem, 5vw, 5.5rem);
+  }
+  .hs-fin__name {
+    margin-top: 0.85rem;
+    font-size: clamp(2.6rem, 4vw, 4.4rem);
+  }
+  .hs-fin__kicker {
+    margin-top: 0.75rem;
+    font-size: clamp(1.15rem, 1.35vw, 1.35rem);
+  }
+  .hs-fin__line {
+    margin-top: 1.1rem;
+  }
+  .hs-fin__foot {
+    align-self: stretch;
+    margin-top: 1.6rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .hs-fin__rack {
+    --g-h: 8.5rem;
+  }
+  .hs-fin__foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}

@@ -1,0 +1,411 @@
+/* ==========================================================================
+   VII — My Femmora, My Story (illustrative)  (prefix: hs-voices / hs-voice)
+   ========================================================================== */
+
+.hs-voices {
+  position: relative;
+  padding-block: var(--section-y);
+  background: var(--bg);
+  color: var(--fg);
+  overflow-x: clip;
+}
+
+/* — Head — */
+.hs-voices__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.4rem;
+}
+.hs-voices__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-h1);
+  line-height: 0.98;
+  letter-spacing: -0.026em;
+  font-variation-settings: 'opsz' 96;
+  text-wrap: balance;
+}
+.hs-voices__title em {
+  color: var(--accent-strong);
+}
+.hs-voices__where {
+  color: var(--accent);
+}
+.hs-voices__where span {
+  margin-inline: 0.45em;
+  color: var(--accent);
+}
+.hs-voices__rule {
+  display: block;
+  height: 1px;
+  margin-top: clamp(2.25rem, 6vh, 3.5rem);
+  background: linear-gradient(90deg, var(--gold-500), var(--gold-300) 40%, var(--line-soft));
+  transform-origin: 0 50%;
+}
+
+/* — The carousel — */
+.hs-voices__stage {
+  position: relative;
+  display: grid;
+  gap: 2.25rem;
+  margin-top: clamp(2.75rem, 7vh, 4.5rem);
+}
+
+/* Aside: the great quote mark, the numeral and the controls */
+.hs-voices__aside {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+}
+.hs-voices__glyph {
+  position: absolute;
+  top: -0.34em;
+  left: -0.06em;
+  z-index: 0;
+  padding-right: 0.1em;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(11rem, 40vw, 26rem);
+  line-height: 1;
+  opacity: 0.16;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+}
+.hs-voices__numerals {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  overflow: hidden;
+  padding-right: 0.16em;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(4.25rem, 14vw, 10.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+}
+.hs-voices__numeral {
+  grid-area: 1 / 1;
+  display: block;
+  padding-right: 0.12em;
+}
+
+.hs-voices__controls {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.hs-voices__btn {
+  display: inline-grid;
+  place-items: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--fg);
+  transition: color 0.5s var(--ease-lux), border-color 0.5s var(--ease-lux), transform 0.5s var(--ease-lux);
+}
+.hs-voices__btn svg {
+  transition: transform 0.6s var(--ease-lux);
+}
+.hs-voices__btn:hover,
+.hs-voices__btn:focus-visible {
+  color: var(--accent-strong);
+  border-color: var(--accent);
+}
+.hs-voices__btn:active {
+  transform: scale(0.94);
+}
+.hs-voices__arrow {
+  width: 1.35rem;
+  height: auto;
+}
+.hs-voices__arrow--prev {
+  transform: scaleX(-1);
+}
+.hs-voices__btn:hover .hs-voices__arrow--next {
+  transform: translateX(3px);
+}
+.hs-voices__btn:hover .hs-voices__arrow--prev {
+  /* flipped, so this nudges left */
+  transform: scaleX(-1) translateX(3px);
+}
+.hs-voices__divider {
+  width: 1px;
+  height: 1.6rem;
+  margin-inline: 0.35rem;
+  background: var(--line-soft);
+}
+.hs-voices__count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  min-width: 5.2rem;
+  justify-content: center;
+}
+.hs-voices__count .numeral {
+  font-size: 1.45rem;
+  line-height: 1;
+  color: var(--accent-strong);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.hs-voices__count-of {
+  font-family: var(--font-sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  color: var(--fg-muted);
+}
+.hs-voices__hint {
+  display: none;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--fg-muted);
+}
+.hs-voices__hint::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: var(--fg-faint);
+  transform: rotate(45deg);
+  transition: background-color 0.6s var(--ease-lux);
+}
+.hs-voices__stage.is-playing .hs-voices__hint::before {
+  background: var(--accent);
+  animation: hs-voices-breathe 2.6s var(--ease-silk) infinite;
+}
+@keyframes hs-voices-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* Panel: the quote itself, framed by four gold corner marks */
+.hs-voices__panel {
+  position: relative;
+  padding: clamp(2rem, 5vw, 4.25rem) clamp(1.25rem, 4vw, 4.25rem) clamp(1.5rem, 3.5vw, 3rem);
+  touch-action: pan-y;
+}
+.hs-voices__corner {
+  position: absolute;
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 0 solid var(--accent);
+  pointer-events: none;
+}
+.hs-voices__corner--tl {
+  top: 0;
+  left: 0;
+  border-top-width: 1px;
+  border-left-width: 1px;
+  transform-origin: 0 0;
+}
+.hs-voices__corner--tr {
+  top: 0;
+  right: 0;
+  border-top-width: 1px;
+  border-right-width: 1px;
+  transform-origin: 100% 0;
+}
+.hs-voices__corner--bl {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  transform-origin: 0 100%;
+}
+.hs-voices__corner--br {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  transform-origin: 100% 100%;
+}
+
+/* Slides share one grid cell, so the panel is always as tall as the longest voice (no layout shift). */
+.hs-voices__slides {
+  display: grid;
+}
+.hs-voice {
+  grid-area: 1 / 1;
+  margin: 0;
+}
+.hs-voice:not(.is-active) {
+  pointer-events: none;
+}
+.hs-voice__quote p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.75rem, 3.25vw, 3.45rem);
+  line-height: 1.14;
+  letter-spacing: -0.018em;
+  font-variation-settings: 'opsz' 72;
+  text-wrap: pretty;
+}
+.hs-voice__word {
+  display: inline-block;
+}
+.hs-voice__by {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 1.1rem;
+  row-gap: 0.35rem;
+  margin-top: clamp(1.75rem, 4vh, 2.5rem);
+}
+.hs-voice__rule {
+  width: clamp(2rem, 5vw, 3.5rem);
+  height: 1px;
+  background: var(--accent);
+}
+.hs-voice__name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.25rem, 1.6vw, 1.55rem);
+  line-height: 1.1;
+}
+.hs-voice__role {
+  grid-column: 2;
+  color: var(--fg-muted);
+  line-height: 1.7;
+}
+
+/* Picker + progress lines */
+.hs-voices__picker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  margin-top: clamp(2.25rem, 5vh, 3.25rem);
+}
+.hs-voices__pick {
+  display: grid;
+  gap: 0.8rem;
+  width: 100%;
+  min-height: 44px;
+  padding-block: 0.7rem 0.4rem;
+  text-align: left;
+  /* inactive story names are button labels: muted, never faint (≥ 4.5:1 on noir) */
+  color: var(--fg-muted);
+  transition: color 0.5s var(--ease-lux);
+}
+.hs-voices__pick:hover,
+.hs-voices__pick:focus-visible,
+.hs-voices__pick.is-active {
+  color: var(--fg);
+}
+.hs-voices__pick.is-active .hs-voices__pick-name {
+  color: var(--accent-strong);
+}
+.hs-voices__pick-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.5s var(--ease-lux);
+}
+.hs-voices__seg {
+  position: relative;
+  display: block;
+  height: 1px;
+  overflow: hidden;
+  background: var(--line-soft);
+}
+.hs-voices__pick.is-active .hs-voices__seg {
+  background: var(--line);
+}
+.hs-voices__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--gold-gradient);
+  background-size: 200% 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+/* The honest footnote: these voices are illustrative */
+.hs-voices__disclaimer {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  max-width: 44rem;
+  margin-top: clamp(2rem, 5vh, 3rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+}
+.hs-voices__disclaimer .hs-dia {
+  transform: translateY(-0.15em) rotate(45deg);
+}
+.hs-voices__disclaimer .label-sm {
+  margin-right: 0.6em;
+  color: var(--accent);
+}
+.hs-voices__disclaimer em {
+  color: var(--fg);
+}
+
+@media (min-width: 900px) {
+  .hs-voices__head {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    grid-template-areas:
+      'eyebrow where'
+      'title title';
+    align-items: center;
+    row-gap: 1.6rem;
+  }
+  .hs-voices__head > .eyebrow {
+    grid-area: eyebrow;
+  }
+  .hs-voices__title {
+    grid-area: title;
+    max-width: 16ch;
+  }
+  .hs-voices__where {
+    grid-area: where;
+    justify-self: end;
+  }
+
+  .hs-voices__stage {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    column-gap: clamp(2.5rem, 5vw, 6rem);
+    align-items: stretch;
+  }
+  .hs-voices__aside {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 1.6rem;
+    padding-bottom: clamp(1.5rem, 3.5vw, 3rem);
+  }
+  .hs-voices__glyph {
+    top: -0.3em;
+  }
+  .hs-voices__hint {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .hs-voices__controls {
+    gap: 0.4rem;
+  }
+  .hs-voices__count {
+    min-width: 4.2rem;
+  }
+  .hs-voices__divider {
+    display: none;
+  }
+}

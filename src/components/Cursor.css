@@ -1,0 +1,61 @@
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  pointer-events: none;
+}
+.cursor-dot {
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border-radius: 50%;
+  background: var(--gold-400);
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  width: 0;
+  height: 0;
+}
+.cursor-ring__circle {
+  position: absolute;
+  left: -18px;
+  top: -18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 165, 92, 0.7);
+  transition: transform 0.55s var(--ease-lux), background-color 0.45s var(--ease-lux), border-color 0.45s;
+}
+.cursor-ring.is-active .cursor-ring__circle {
+  transform: scale(1.6);
+  border-color: var(--gold-400);
+}
+.cursor-ring.has-label .cursor-ring__circle {
+  transform: scale(2.9);
+  background: rgba(42, 10, 18, 0.82);
+  border-color: var(--gold-500);
+  backdrop-filter: blur(4px);
+}
+.cursor-ring__label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%) scale(0.6);
+  opacity: 0;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--ivory-100);
+  transition: opacity 0.35s var(--ease-lux), transform 0.5s var(--ease-lux);
+}
+.cursor-ring.has-label .cursor-ring__label {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+html.cursor-out .cursor-dot,
+html.cursor-out .cursor-ring {
+  opacity: 0;
+}

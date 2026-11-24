@@ -1,0 +1,319 @@
+/* ── Custom Services · For organisations ─────────────────────────────────── */
+
+.cus-org {
+  overflow: clip;
+}
+.cus-org__top {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4.2fr);
+  gap: clamp(2.5rem, 7vw, 8rem);
+  align-items: start;
+}
+.cus-org__title {
+  margin-top: 1.5rem;
+  max-width: 15ch;
+}
+.cus-org__lead {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  max-width: 38rem;
+}
+
+.cus-org__stat {
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.75rem;
+  align-items: end;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+  max-width: 44rem;
+}
+.cus-org__stat-v {
+  display: flex;
+  align-items: flex-start;
+  line-height: 0.82;
+}
+.cus-org__stat-n {
+  font-size: clamp(5rem, 11vw, 9.5rem);
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums lining-nums;
+  background: var(--gold-gradient);
+  background-size: 180% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.cus-org__stat-pc {
+  margin-left: 0.15em;
+  margin-top: 0.3em;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  color: var(--gold-400);
+}
+.cus-org__stat-t {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.15rem, 1.4vw, 1.35rem);
+  line-height: 1.45;
+  color: var(--fg-muted);
+  padding-bottom: 0.5rem;
+}
+
+.cus-org__media {
+  position: relative;
+  margin: 0;
+  padding-top: clamp(0rem, 6vw, 6rem);
+  will-change: transform;
+}
+.cus-org__arch {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+}
+/* a second, offset hairline arch — the tailor's chalk outline */
+.cus-org__arch::before {
+  content: '';
+  position: absolute;
+  inset: -1rem -1rem 1rem 1rem;
+  border: 1px solid var(--line-soft);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  pointer-events: none;
+}
+.cus-org__caption {
+  margin-top: 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  color: var(--fg-muted);
+  line-height: 1.7;
+}
+.cus-org__caption .numeral {
+  color: var(--accent);
+  letter-spacing: 0;
+  font-size: 0.95rem;
+}
+
+/* ── the boardroom (SVG) ── */
+.cus-room {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.cus-room__ground {
+  fill: var(--wine-900);
+}
+.cus-room__parquet {
+  fill: none;
+  stroke: var(--gold-500);
+  stroke-width: 0.6;
+  opacity: 0.16;
+}
+.cus-room__arch {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.cus-room__table {
+  fill: var(--wine-800);
+}
+.cus-room__table-line {
+  fill: none;
+  stroke: var(--gold-400);
+  stroke-width: 1.1;
+}
+.cus-room__inlay {
+  fill: none;
+  stroke: var(--gold-500);
+  stroke-width: 0.6;
+  opacity: 0.5;
+}
+.cus-room__runner {
+  fill: none;
+  stroke: var(--gold-500);
+  stroke-width: 0.7;
+  stroke-dasharray: 2 4;
+  opacity: 0.55;
+}
+.cus-room__lamp {
+  fill: none;
+  stroke: var(--gold-300);
+  stroke-width: 0.8;
+  opacity: 0.8;
+}
+.cus-room__pads rect {
+  fill: rgba(248, 244, 236, 0.1);
+  stroke: rgba(227, 200, 138, 0.35);
+  stroke-width: 0.5;
+}
+.cus-room__seat {
+  fill: var(--wine-850);
+  stroke: var(--gold-500);
+  stroke-width: 0.9;
+}
+.cus-room__back {
+  fill: none;
+  stroke: var(--gold-500);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+.cus-room__chair--her .cus-room__seat {
+  fill: var(--gold-300);
+  stroke: var(--gold-200);
+}
+.cus-room__chair--her .cus-room__back {
+  stroke: var(--gold-200);
+  stroke-width: 1.8;
+}
+.cus-room__halo {
+  fill: none;
+  stroke: var(--gold-300);
+  stroke-width: 0.8;
+  opacity: 0.7;
+}
+.cus-room__pulse {
+  fill: none;
+  stroke: var(--gold-200);
+  stroke-width: 0.8;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cus-room-pulse 3.2s var(--ease-lux) infinite;
+}
+@keyframes cus-room-pulse {
+  0% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.4);
+  }
+}
+.cus-room__lead {
+  fill: none;
+  stroke: var(--gold-300);
+  stroke-width: 0.8;
+}
+.cus-room__tag {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 13px;
+  fill: var(--gold-200);
+}
+
+/* three columns */
+.cus-org__cols {
+  margin-top: clamp(4.5rem, 10vw, 8rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 4rem);
+}
+.cus-org__col {
+  position: relative;
+  padding-top: 1.75rem;
+}
+.cus-org__col-rule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gold-500);
+  opacity: 0.6;
+  transform-origin: left center;
+}
+.cus-org__col-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+.cus-org__col-n {
+  font-size: 1.6rem;
+  color: var(--accent);
+  min-width: 2.2rem;
+}
+.cus-org__col ul {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 0.15rem;
+}
+.cus-org__col li {
+  position: relative;
+  padding: 0.7rem 0 0.7rem 1.4rem;
+  border-bottom: 1px solid var(--line-soft);
+  color: var(--fg-muted);
+  line-height: 1.45;
+}
+.cus-org__col li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.3rem;
+  width: 0.55rem;
+  height: 1px;
+  background: var(--accent);
+}
+
+.cus-org__col-k {
+  margin-bottom: 0.35rem;
+  color: var(--accent);
+}
+.cus-org__foot {
+  margin-top: clamp(3.5rem, 7vw, 5.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.cus-org__for {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+}
+.cus-org__for-k {
+  color: var(--fg-muted);
+}
+.cus-org__sectors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.cus-org__sectors li {
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--line);
+  color: var(--fg-muted);
+}
+
+@media (max-width: 1023px) {
+  .cus-org__top {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.7fr);
+  }
+  .cus-org__cols {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.75rem;
+  }
+}
+@media (max-width: 760px) {
+  .cus-org__top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cus-org__media {
+    width: min(78%, 22rem);
+    margin-inline: auto;
+    padding-top: 1rem;
+  }
+  .cus-org__arch::before {
+    inset: -0.75rem -0.75rem 0.75rem 0.75rem;
+  }
+  .cus-org__stat {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+  .cus-org__foot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

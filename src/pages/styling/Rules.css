@@ -1,0 +1,151 @@
+/* ==========================================================================
+   05 — The Femmora rules  (prefix: sty-rules / sty-rule)
+   ========================================================================== */
+
+.sty-rules {
+  overflow: clip;
+}
+.sty-rules__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1rem, 3vh, 2rem);
+}
+.sty-rules__aside .sty-head {
+  margin-bottom: clamp(2rem, 5vh, 3rem);
+}
+
+/* — Sticky meter (desktop only) — */
+.sty-rules__meter {
+  display: none;
+}
+.sty-rules__big {
+  position: relative;
+  height: clamp(9.5rem, 14vw, 13.5rem);
+  overflow: hidden;
+}
+.sty-rules__big-num {
+  position: absolute;
+  left: -0.04em;
+  bottom: 0;
+  display: block;
+  padding-right: 0.22em;
+  font-size: clamp(9rem, 14vw, 13.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  background: var(--gold-gradient);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.sty-rules__progress {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+.sty-rules__track {
+  position: relative;
+  flex: 1;
+  max-width: 16rem;
+  height: 1px;
+  background: var(--line-soft);
+}
+.sty-rules__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: left center;
+}
+.sty-rules__count {
+  color: var(--fg);
+  white-space: nowrap;
+}
+.sty-rules__of {
+  color: var(--fg-muted);
+}
+
+/* ==========================================================================
+   The list
+   ========================================================================== */
+.sty-rules__list {
+  position: relative;
+}
+.sty-rules__list::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--line-soft);
+}
+.sty-rule {
+  position: relative;
+  display: grid;
+  grid-template-columns: clamp(4.25rem, 10vw, 7.5rem) minmax(0, 1fr);
+  gap: clamp(1rem, 2.5vw, 2.25rem);
+  padding-block: clamp(2rem, 5vh, 3.1rem);
+}
+.sty-rule__rule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--line);
+  transform-origin: left center;
+}
+.sty-rule__num {
+  display: block;
+  padding-right: 0.12em;
+  font-size: clamp(2.5rem, 5vw, 4.4rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--accent);
+  transition: color 0.7s var(--ease-lux);
+  will-change: transform;
+}
+.sty-rule.is-active .sty-rule__num {
+  color: var(--accent-strong);
+}
+.sty-rule__text {
+  min-width: 0;
+  transition: opacity 0.7s var(--ease-lux);
+}
+.sty-rule__title {
+  max-width: 22ch;
+  margin-bottom: 0.85rem;
+  padding-right: 0.06em;
+}
+.sty-rule__body {
+  max-width: 36rem;
+}
+
+/* ==========================================================================
+   Desktop
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .sty-rules__layout {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(1rem, 2vw, 2rem);
+  }
+  .sty-rules__aside {
+    grid-column: 1 / 6;
+  }
+  .sty-rules__meter {
+    position: sticky;
+    top: calc(var(--nav-h) + 2.5rem);
+    display: block;
+  }
+  .sty-rules__list {
+    grid-column: 6 / 13;
+    padding-top: 0.5rem;
+  }
+  /* the rules not being read recede — but no further than 0.75, where the muted body copy still holds 4.5:1 on burgundy */
+  .sty-rule:not(.is-active) .sty-rule__text {
+    opacity: 0.75;
+  }
+}

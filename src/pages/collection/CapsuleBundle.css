@@ -1,0 +1,560 @@
+/* ==========================================================================
+   Collection — Capsule bundles (prefix col-cap) · theme: noir
+   The set hangs on a rail (left); the printed how-to-wear card sits in its
+   rigid box (right). Selecting a look lights the pieces it is made from.
+   ========================================================================== */
+.col-cap {
+  overflow: clip;
+}
+
+/* ---------- head ---------- */
+.col-cap__head {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: end;
+  margin-bottom: clamp(2.75rem, 7vh, 4.5rem);
+}
+.col-cap__title {
+  margin-top: 1.75rem;
+}
+.col-cap__title em {
+  font-style: italic;
+  padding-right: 0.06em;
+}
+.col-cap__intro {
+  max-width: 40ch;
+  justify-self: end;
+}
+.col-cap__promise {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--accent);
+}
+.col-cap__promise::before {
+  content: '';
+  width: 2.25rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+}
+
+/* ---------- tabs ---------- */
+.col-cap__tabs {
+  display: flex;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  border-bottom: 1px solid var(--line-soft);
+}
+.col-cap__tab {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 0.85rem;
+  row-gap: 0.3rem;
+  align-items: baseline;
+  min-height: 48px;
+  padding: 1rem 0 1.15rem;
+  text-align: left;
+  color: var(--fg-muted);
+  transition: color 0.45s var(--ease-lux);
+}
+.col-cap__tab:hover,
+.col-cap__tab[aria-selected='true'] {
+  color: var(--fg);
+}
+.col-cap__tab-n {
+  grid-row: span 2;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+.col-cap__tab-t {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+  line-height: 1.15;
+}
+.col-cap__tab-s {
+  color: var(--fg-muted);
+  font-size: 0.58rem;
+}
+.col-cap__tab-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--gold-400);
+}
+.col-cap__tab:focus-visible {
+  outline-offset: 2px;
+}
+
+/* ---------- panel ---------- */
+.col-cap__panel {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(1rem, 2.4vw, 2.5rem);
+  row-gap: 3.5rem;
+  padding-top: clamp(2.5rem, 6vh, 4rem);
+  outline: none;
+}
+.col-cap__panel:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 6px;
+}
+.col-cap__set {
+  grid-column: 1 / span 7;
+  min-width: 0;
+}
+.col-cap__box {
+  grid-column: 8 / span 5;
+  min-width: 0;
+}
+
+/* the set on its rail */
+.col-cap__rail-wrap {
+  position: relative;
+}
+.col-cap__rail {
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  top: calc(1.75rem + 2.4%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-600) 10%, var(--gold-300) 50%, var(--gold-600) 90%, transparent);
+  opacity: 0.55;
+}
+.col-cap__pieces {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.4vw, 1.25rem);
+  padding-top: 1.75rem;
+}
+.col-cap__piece {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+.col-cap__piece-art {
+  display: block;
+  aspect-ratio: 3 / 4;
+  margin-bottom: 0.6rem;
+  transform-origin: 50% 2%;
+}
+.col-cap__piece.is-lit .col-cap__piece-art {
+  animation: col-cap-sway 2.4s var(--ease-lux) var(--d, 0s);
+}
+.col-cap__piece-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.1vw, 1.08rem);
+  line-height: 1.2;
+}
+.col-cap__piece-meta {
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  line-height: 1.6;
+  color: var(--fg-muted);
+}
+@keyframes col-cap-sway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(1.6deg);
+  }
+  60% {
+    transform: rotate(-0.9deg);
+  }
+}
+
+/* the sum */
+.col-cap__sum {
+  margin: 2.5rem 0 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2.4fr);
+  border-top: 1px solid var(--line);
+}
+.col-cap__sum > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.1rem 1.25rem 0 0;
+  min-width: 0;
+}
+.col-cap__sum > div + div {
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--line-soft);
+}
+.col-cap__sum dt {
+  color: var(--accent);
+}
+.col-cap__sum dd {
+  margin: 0;
+}
+.col-cap__sum dd.numeral {
+  font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+  line-height: 1;
+}
+.col-cap__sum-price dd {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.col-cap__price {
+  font-family: var(--font-sans);
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.col-cap__price-note {
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--fg-muted);
+}
+
+/* size */
+.col-cap__size {
+  margin: 2.25rem 0 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.col-cap__size legend {
+  padding: 0;
+  margin-bottom: 0.85rem;
+  color: var(--fg);
+}
+.col-cap__sizes {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  max-width: 30rem;
+  box-shadow: inset 0 0 0 1px var(--line-soft);
+}
+.col-cap__size.has-error .col-cap__sizes {
+  box-shadow: inset 0 0 0 1px var(--gold-400);
+}
+.col-cap__size-opt {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 48px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  color: var(--fg-muted);
+  transition: color 0.35s var(--ease-lux), background-color 0.35s var(--ease-lux);
+  touch-action: manipulation;
+}
+.col-cap__size-opt + .col-cap__size-opt {
+  box-shadow: inset 1px 0 0 var(--line-soft);
+}
+.col-cap__size-opt:hover {
+  color: var(--fg);
+}
+.col-cap__size-opt:has(input:checked) {
+  color: var(--wine-900);
+  background: var(--gold-400);
+}
+.col-cap__size-opt:has(input:focus-visible) {
+  outline: 1px solid var(--accent-strong);
+  outline-offset: 2px;
+  z-index: 1;
+}
+.col-cap__error {
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--gold-200);
+}
+.col-cap__error:not(:empty) {
+  margin-top: 0.75rem;
+  padding-left: 0.9rem;
+  border-left: 1px solid var(--gold-400);
+}
+.col-cap__actions {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 2rem;
+}
+.col-cap__add {
+  text-align: center;
+}
+.col-cap__fine {
+  max-width: 34ch;
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+
+/* ---------- the rigid box ---------- */
+.col-cap__box {
+  position: relative;
+  align-self: start;
+  padding: clamp(2.75rem, 4vw, 3.5rem) clamp(1.1rem, 2.4vw, 2rem) clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--wine-900);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    inset 0 0 0 9px var(--wine-900),
+    inset 0 0 0 10px var(--line-soft);
+}
+.col-cap__box-label {
+  position: absolute;
+  top: 1.15rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.56rem;
+  color: var(--fg-muted);
+}
+
+/* the printed card (ivory stationery) — gold text deepened to --gold-700 (5.2:1 on ivory-50);
+   the attribute in the selector out-ranks the global [data-theme='ivory'] scope regardless of CSS order */
+.col-cap__card[data-theme] {
+  --accent: var(--gold-700);
+}
+.col-cap__card {
+  position: relative;
+  padding: clamp(1.4rem, 2.4vw, 2rem) clamp(1.1rem, 2vw, 1.75rem) 1.25rem;
+  background: var(--ivory-50);
+  color: var(--fg);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    inset 0 0 0 5px var(--ivory-50),
+    inset 0 0 0 6px var(--line-soft),
+    0 34px 60px -34px rgba(0, 0, 0, 0.7);
+  transform: rotate(-1.4deg);
+  transition: transform 1s var(--ease-lux);
+}
+@media (hover: hover) and (pointer: fine) {
+  .col-cap__box:hover .col-cap__card {
+    transform: rotate(0deg) translateY(-4px);
+  }
+}
+.col-cap__card-head {
+  text-align: center;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+.col-cap__wordmark {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.55rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.col-cap__card-k {
+  margin-top: 0.75rem;
+  color: var(--accent);
+}
+.col-cap__card-title {
+  margin-top: 0.5rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 1.7vw, 1.5rem);
+  line-height: 1.15;
+}
+.col-cap__card-sub {
+  margin-top: 0.35rem;
+  font-style: italic;
+  font-size: 0.98rem;
+  color: var(--fg-muted);
+}
+
+.col-cap__looks {
+  margin-top: 0.4rem;
+}
+.col-cap__looks li + li {
+  border-top: 1px solid var(--line-soft);
+}
+.col-cap__look {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.9rem minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.35rem 0.85rem;
+  min-height: 48px;
+  padding: 0.55rem 0.5rem 0.55rem 0.6rem;
+  text-align: left;
+  color: var(--fg);
+  transition: background-color 0.4s var(--ease-lux);
+}
+.col-cap__look::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 22%;
+  bottom: 22%;
+  width: 2px;
+  background: var(--gold-600);
+  transform: scaleY(0);
+  transition: transform 0.5s var(--ease-lux);
+}
+.col-cap__look[aria-pressed='true'] {
+  background: rgba(132, 102, 46, 0.08);
+}
+.col-cap__look[aria-pressed='true']::before {
+  transform: scaleY(1);
+}
+.col-cap__look:focus-visible {
+  outline-offset: -2px;
+}
+.col-cap__look-n {
+  font-size: 0.95rem;
+  color: var(--accent);
+}
+.col-cap__look-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.col-cap__look-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.02rem;
+  line-height: 1.2;
+}
+.col-cap__look-when {
+  font-style: italic;
+  font-size: 0.92rem;
+  line-height: 1.3;
+  color: var(--fg-muted);
+}
+.col-cap__chips {
+  display: inline-flex;
+  gap: 4px;
+}
+.col-cap__chip {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 0 1px var(--line);
+}
+.col-cap__look-level {
+  min-width: 7.2rem;
+  font-family: var(--font-sans);
+  font-size: 0.56rem;
+  font-weight: 450;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: right;
+  white-space: nowrap;
+  color: var(--fg-muted);
+}
+.col-cap__look-level .numeral {
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--accent);
+}
+.col-cap__card-foot {
+  margin-top: 0.9rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 0.56rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* ---------- responsive ---------- */
+/* small laptops: a 5-column box leaves the card's look names ~70 px wide — share the row evenly */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .col-cap__set {
+    grid-column: 1 / span 6;
+  }
+  .col-cap__box {
+    grid-column: 7 / span 6;
+  }
+  .col-cap__look-level {
+    min-width: 6.2rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  .col-cap__head {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+  .col-cap__intro {
+    justify-self: start;
+  }
+  .col-cap__set,
+  .col-cap__box {
+    grid-column: 1 / -1;
+  }
+  .col-cap__box {
+    max-width: 38rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .col-cap__tabs {
+    flex-direction: column;
+    gap: 0;
+  }
+  .col-cap__tab-line {
+    left: 0;
+    right: auto;
+    top: 0.9rem;
+    bottom: 0.9rem;
+    width: 1px;
+    height: auto;
+  }
+  .col-cap__tab {
+    padding-left: 1rem;
+  }
+  .col-cap__pieces {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 1.75rem;
+  }
+  .col-cap__rail {
+    display: none;
+  }
+  .col-cap__sum {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .col-cap__sum-price {
+    grid-column: 1 / -1;
+    padding-left: 0 !important;
+    border-left: 0 !important;
+    margin-top: 1rem;
+    border-top: 1px solid var(--line-soft);
+  }
+  .col-cap__look {
+    grid-template-columns: 1.6rem minmax(0, 1fr) auto;
+  }
+  .col-cap__look-level {
+    grid-column: 2 / -1;
+    min-width: 0;
+    text-align: left;
+  }
+  .col-cap__card {
+    transform: none;
+  }
+  .col-cap__add {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .col-cap__piece.is-lit .col-cap__piece-art {
+    animation: none;
+  }
+}

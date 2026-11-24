@@ -1,0 +1,402 @@
+/* ── Custom Services · The atelier process ──────────────────────────────────
+   Mobile-first: a vertical thread with stacked steps.
+   ≥1024px (and motion allowed): a pinned horizontal thread, drawn by scroll. */
+
+.cus-process {
+  position: relative;
+  background: var(--bg);
+  color: var(--fg);
+  overflow: clip;
+}
+.cus-process__pin {
+  position: relative;
+  padding-block: var(--section-y);
+  overflow: hidden;
+}
+.cus-process__ghost {
+  position: absolute;
+  top: 1.5rem;
+  left: -2vw;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 34vw;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(201, 165, 92, 0.13);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+}
+.cus-process__inner {
+  position: relative;
+}
+
+.cus-process__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.cus-process__title {
+  margin-top: 1.4rem;
+  max-width: 17ch;
+}
+.cus-process__count {
+  display: none;
+  align-items: flex-end;
+  gap: 0.9rem;
+  color: var(--accent);
+}
+.cus-process__count-n {
+  display: inline-block;
+  min-width: 2.2ch;
+  text-align: right;
+  font-size: clamp(4rem, 7.5vw, 7.5rem);
+  line-height: 0.82;
+}
+.cus-process__count-of {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding-bottom: 0.35rem;
+  color: var(--fg-faint);
+}
+.cus-process__count-of .numeral {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* ── thread ── */
+.cus-process__track {
+  position: relative;
+  margin-top: clamp(3rem, 8vw, 4.5rem);
+}
+.cus-thread {
+  overflow: visible;
+  pointer-events: none;
+}
+.cus-thread--h {
+  display: none;
+}
+.cus-thread--v {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 100%;
+}
+.cus-thread__base,
+.cus-thread__draw {
+  fill: none;
+  stroke-linecap: round;
+}
+.cus-thread__base {
+  stroke: var(--gold-500);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+  opacity: 0.38;
+}
+.cus-thread__draw {
+  stroke: var(--gold-400);
+  stroke-width: 1.8;
+  filter: drop-shadow(0 0 3px rgba(227, 200, 138, 0.5));
+}
+.cus-needle__body {
+  fill: var(--gold-200);
+}
+.cus-needle__eye {
+  fill: var(--wine-900);
+}
+.cus-needle {
+  filter: drop-shadow(0 0 4px rgba(241, 223, 178, 0.55));
+}
+
+/* ── steps (vertical) ── */
+.cus-process__list {
+  position: relative;
+  display: grid;
+  gap: clamp(2.5rem, 7vw, 3.5rem);
+  padding-left: 3.75rem;
+}
+.cus-step {
+  position: relative;
+}
+.cus-step__dot {
+  position: absolute;
+  top: 0.55rem;
+  left: calc(-3.75rem + 20px - 7.5px);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-500);
+  background: var(--bg);
+}
+.cus-step__dot::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--gold-400);
+  transform: scale(0);
+  transition: transform 0.6s var(--ease-lux);
+}
+.cus-step__dot::after {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-400);
+  opacity: 0;
+  transform: scale(0.6);
+}
+.cus-step.is-on .cus-step__dot::before {
+  transform: scale(1);
+}
+.cus-step.is-current .cus-step__dot::after {
+  animation: cus-ring 2.4s var(--ease-lux) infinite;
+}
+@keyframes cus-ring {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+
+.cus-step__card {
+  position: relative;
+  display: grid;
+  justify-items: start;
+  opacity: 0.32;
+  transform: translateY(12px);
+  transition: opacity 0.8s var(--ease-lux), transform 0.9s var(--ease-lux);
+}
+.cus-step.is-on .cus-step__card {
+  opacity: 1;
+  transform: none;
+}
+.cus-step__n {
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--accent);
+}
+.cus-step__meta {
+  margin-top: 0.7rem;
+  /* small caps on burgundy: --fg-faint is only 3.3:1 here */
+  color: var(--fg-muted);
+}
+.cus-step__title {
+  margin-top: 0.45rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.45rem, 4.6vw, 1.85rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  transition: color 0.6s var(--ease-lux);
+}
+.cus-step__body {
+  margin-top: 0.65rem;
+  max-width: 38ch;
+  color: var(--fg-muted);
+}
+
+.cus-stage {
+  display: none;
+}
+
+/* ── desktop: the pinned horizontal thread ── */
+@media (min-width: 1024px) {
+  .cus-process:not(.is-static) .cus-process__pin {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: calc(var(--nav-h) + clamp(0.5rem, 3vh, 2rem));
+    padding-bottom: clamp(1.5rem, 4vh, 3rem);
+  }
+  .cus-process:not(.is-static) .cus-process__ghost {
+    top: auto;
+    bottom: -5vw;
+    font-size: 26vw;
+  }
+  .cus-process:not(.is-static) .cus-process__title {
+    font-size: clamp(2rem, 3.3vw, 3.4rem);
+    max-width: 19ch;
+  }
+  .cus-process:not(.is-static) .cus-process__count {
+    display: flex;
+  }
+
+  .cus-process:not(.is-static) .cus-process__track {
+    aspect-ratio: 1000 / 200;
+    margin-top: clamp(4.5rem, 12vh, 8rem);
+    margin-bottom: clamp(4.5rem, 11vh, 7.5rem);
+  }
+  .cus-process:not(.is-static) .cus-thread--h {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .cus-process:not(.is-static) .cus-thread--v {
+    display: none;
+  }
+
+  .cus-process:not(.is-static) .cus-process__list {
+    position: absolute;
+    inset: 0;
+    display: block;
+    padding: 0;
+  }
+  .cus-process:not(.is-static) .cus-step {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 0;
+    height: 0;
+  }
+  .cus-process:not(.is-static) .cus-step__dot {
+    top: -7.5px;
+    left: -7.5px;
+  }
+  .cus-process:not(.is-static) .cus-step__card {
+    position: absolute;
+    left: 0;
+    width: clamp(11rem, 15vw, 15rem);
+    justify-items: center;
+    text-align: center;
+    opacity: 0.3;
+    transform: translate(-50%, var(--off, 10px));
+  }
+  .cus-process:not(.is-static) .cus-step--up .cus-step__card {
+    bottom: 1.9rem;
+  }
+  .cus-process:not(.is-static) .cus-step--down .cus-step__card {
+    --off: -10px;
+    top: 1.9rem;
+  }
+  .cus-process:not(.is-static) .cus-step__card::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 1px;
+    height: 1.25rem;
+    background: var(--line);
+  }
+  .cus-process:not(.is-static) .cus-step--up .cus-step__card::before {
+    top: calc(100% + 0.3rem);
+  }
+  .cus-process:not(.is-static) .cus-step--down .cus-step__card::before {
+    bottom: calc(100% + 0.3rem);
+  }
+  .cus-process:not(.is-static) .cus-step.is-on .cus-step__card {
+    opacity: 0.62;
+    transform: translate(-50%, 0);
+  }
+  .cus-process:not(.is-static) .cus-step.is-current .cus-step__card {
+    opacity: 1;
+  }
+  .cus-process:not(.is-static) .cus-step.is-current .cus-step__title {
+    color: var(--gold-300);
+  }
+  .cus-process:not(.is-static) .cus-step__meta {
+    margin-top: 0.5rem;
+  }
+  .cus-process:not(.is-static) .cus-step__title {
+    font-size: clamp(1.25rem, 1.75vw, 1.7rem);
+  }
+  /* the full text lives in the stage on desktop; keep it for assistive tech */
+  .cus-process:not(.is-static) .cus-step__body {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .cus-process:not(.is-static) .cus-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 3rem;
+  }
+  .cus-stage__items {
+    display: grid;
+  }
+  .cus-stage__item {
+    grid-area: 1 / 1;
+    display: flex;
+    align-items: baseline;
+    gap: 1.4rem;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s var(--ease-lux), transform 0.8s var(--ease-lux);
+  }
+  .cus-stage__item.is-current {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.12s;
+  }
+  .cus-stage__n {
+    font-size: 2.1rem;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .cus-stage__body {
+    max-width: 48ch;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.3rem, 1.7vw, 1.7rem);
+    line-height: 1.4;
+    color: var(--fg);
+  }
+  .cus-process__progress {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.8rem;
+    color: var(--fg-faint);
+  }
+  .cus-process__bar {
+    position: relative;
+    display: block;
+    width: 12rem;
+    height: 1px;
+    overflow: hidden;
+    background: var(--line-soft);
+  }
+  .cus-process__bar span {
+    position: absolute;
+    inset: 0;
+    background: var(--gold-400);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+}
+
+/* short desktop screens: tighten the pinned composition */
+@media (min-width: 1024px) and (max-height: 820px) {
+  .cus-process:not(.is-static) .cus-process__title {
+    font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+  }
+  .cus-process:not(.is-static) .cus-process__count-n {
+    font-size: 4.5rem;
+  }
+  .cus-process:not(.is-static) .cus-process__track {
+    margin-top: 3.75rem;
+    margin-bottom: 3.75rem;
+  }
+  .cus-process:not(.is-static) .cus-stage__body {
+    font-size: 1.25rem;
+  }
+}

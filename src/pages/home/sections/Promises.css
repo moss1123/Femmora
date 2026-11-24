@@ -1,0 +1,430 @@
+/* ==========================================================================
+   III — The four promises  (prefix: hs-promises / hs-promise)
+   Flow layout by default; horizontal pinned gallery under the MQ.pin query.
+   ========================================================================== */
+
+.hs-promises {
+  position: relative;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.hs-promises__stage {
+  position: relative;
+  padding-block: var(--section-y);
+  background: var(--bg);
+  overflow: hidden;
+  /* clip, not a scroll container: focusing the off-stage outro link must never scroll the stage sideways */
+  overflow: clip;
+}
+
+.hs-promises__track {
+  display: grid;
+  gap: clamp(4.5rem, 11vh, 7rem);
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* — Intro — */
+.hs-promises__intro {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3vh, 2rem);
+}
+.hs-promises__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-h1);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  font-variation-settings: 'opsz' 96;
+}
+.hs-promises__title em {
+  display: block;
+  color: var(--accent-strong);
+}
+.hs-promises__lead {
+  max-width: 30rem;
+  font-family: var(--font-serif);
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+.hs-promises__hint {
+  display: none;
+  align-items: center;
+  gap: 1rem;
+  color: var(--accent);
+}
+.hs-promises__hint svg {
+  animation: hs-nudge 2.4s var(--ease-silk) infinite;
+}
+@keyframes hs-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+}
+
+/* — A promise panel — */
+.hs-promise {
+  display: grid;
+  gap: clamp(2rem, 5vh, 3rem);
+  padding-top: clamp(2.5rem, 6vh, 3.5rem);
+  border-top: 1px solid var(--line-soft);
+}
+
+.hs-promise__visual {
+  position: relative;
+  height: clamp(23rem, 108vw, 31rem);
+  min-height: 0;
+}
+.hs-promise__numeral {
+  position: absolute;
+  top: 0;
+  left: -0.04em;
+  z-index: 0;
+  padding-right: 0.18em; /* keep italic overhang inside the foil box */
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(7.5rem, 36vw, 15rem);
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  opacity: 0.94;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.hs-promise__reveal {
+  --cap: 14rem;
+  --ar: 1;
+  position: absolute;
+  z-index: 1;
+  top: 14%;
+  right: 4%;
+  width: min(var(--cap), 58vw);
+  padding: 9px;
+  border: 1px solid var(--line);
+}
+.hs-promise__mask {
+  position: relative;
+  aspect-ratio: var(--ar);
+  overflow: hidden;
+  background: var(--bg-elev);
+}
+.hs-promise__plate {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 60%;
+}
+
+.hs-promise--rect .hs-promise__reveal {
+  --cap: 13rem;
+  --ar: 136 / 113;
+}
+.hs-promise--arch .hs-promise__reveal {
+  --cap: 13rem;
+  --ar: 175 / 290;
+}
+.hs-promise--arch .hs-promise__reveal,
+.hs-promise--arch .hs-promise__mask {
+  border-radius: 999px 999px 0 0;
+}
+.hs-promise--circle .hs-promise__reveal {
+  --cap: 17rem;
+  --ar: 1;
+}
+.hs-promise--circle .hs-promise__reveal,
+.hs-promise--circle .hs-promise__mask {
+  border-radius: 50%;
+}
+.hs-promise--square .hs-promise__reveal {
+  --cap: 14rem;
+  --ar: 185 / 160;
+}
+
+.hs-promise__art {
+  position: absolute;
+  z-index: 2;
+  left: 2%;
+  bottom: 6%;
+  width: min(11.5rem, 44vw);
+  color: var(--accent);
+}
+.hs-art {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.hs-art * {
+  vector-effect: non-scaling-stroke;
+}
+
+.hs-promise__fig {
+  position: absolute;
+  z-index: 2;
+  right: 4%;
+  bottom: 0;
+  /* stays clear of the line-art drawing at the bottom-left on a phone */
+  max-width: min(13rem, 46%);
+  text-align: right;
+  line-height: 1.7;
+  color: var(--fg-muted);
+}
+
+.hs-promise__text {
+  display: grid;
+  align-content: center;
+  gap: 1.35rem;
+  max-width: 31rem;
+}
+.hs-promise__count {
+  color: var(--accent);
+}
+.hs-promise__count span {
+  margin-left: 0.6em;
+  color: var(--fg-muted);
+}
+.hs-promise__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.1rem, 3.6vw, 3.9rem);
+  line-height: 1;
+  letter-spacing: -0.022em;
+  font-variation-settings: 'opsz' 96;
+  text-wrap: balance;
+}
+.hs-promise__body {
+  font-family: var(--font-serif);
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+.hs-promise__ends {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line-soft);
+}
+.hs-promise__ends > p {
+  color: var(--fg-muted);
+}
+.hs-promise__ends ul {
+  display: grid;
+  gap: 0.3rem;
+  margin-top: 0.85rem;
+}
+.hs-promise__ends li {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.18rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+.hs-promise__strike {
+  position: absolute;
+  left: -0.2em;
+  right: -0.2em;
+  top: 56%;
+  height: 1px;
+  background: var(--accent);
+  transform-origin: 0 50%;
+}
+
+/* — Outro — */
+.hs-promises__outro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding-top: clamp(2.5rem, 6vh, 3.5rem);
+  border-top: 1px solid var(--line-soft);
+}
+.hs-promises__outro-label {
+  color: var(--accent);
+}
+.hs-promises__motto {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(2.6rem, 5.4vw, 6rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  font-variation-settings: 'opsz' 96;
+  background: var(--gold-gradient);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.12em;
+}
+.hs-promises__outro-body {
+  max-width: 26rem;
+  font-size: var(--fs-body);
+  color: var(--fg-muted);
+}
+
+/* — Progress (pinned only) — */
+.hs-promises__progress {
+  display: none;
+}
+
+/* Wide flow (e.g. reduced motion on desktop): two columns per promise */
+@media (min-width: 900px) {
+  .hs-promise {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: center;
+    column-gap: clamp(2.5rem, 5vw, 5rem);
+  }
+  .hs-promise__visual {
+    height: clamp(28rem, 62vh, 36rem);
+  }
+  .hs-promise__numeral {
+    font-size: clamp(12rem, 20vw, 20rem);
+  }
+  .hs-promise__art {
+    width: min(13rem, 30vh);
+  }
+}
+
+/* ==========================================================================
+   Pinned horizontal gallery (keep in sync with MQ.pin in constants.ts)
+   ========================================================================== */
+@media (min-width: 768px) and (min-height: 560px) and (prefers-reduced-motion: no-preference) {
+  .hs-promises__stage {
+    height: 100svh;
+    padding: 0;
+  }
+  .hs-promises__track {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    width: max-content;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+    padding: calc(var(--nav-h) + 1rem) 0 6rem;
+    will-change: transform;
+  }
+  .hs-promises__intro {
+    justify-content: center;
+    width: clamp(25rem, 44vw, 42rem);
+    padding: 0 clamp(2rem, 4vw, 4rem) 0 var(--gutter);
+  }
+  .hs-promises__hint {
+    display: inline-flex;
+  }
+
+  .hs-promise {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+    align-items: stretch;
+    width: clamp(44rem, 76vw, 78rem);
+    height: 100%;
+    padding: 0 clamp(2rem, 4vw, 4.5rem);
+    border-top: 0;
+    border-left: 1px solid var(--line-soft);
+  }
+  .hs-promise__visual {
+    height: 100%;
+  }
+  .hs-promise__numeral {
+    font-size: min(40vh, 21vw);
+  }
+  .hs-promise__reveal {
+    width: min(var(--cap), 34vh);
+  }
+  .hs-promise--circle .hs-promise__reveal {
+    width: min(var(--cap), 38vh);
+  }
+  /* the arch is 1.66× taller than wide: keep it inside the panel's height (nav + track padding = nav-h + 7rem) */
+  .hs-promise--arch .hs-promise__reveal {
+    width: min(var(--cap), 34vh, calc((100svh - var(--nav-h) - 7rem) * 0.45 - 0.7rem));
+  }
+  .hs-promise__art {
+    width: min(13rem, 30vh);
+    bottom: 9%;
+  }
+
+  .hs-promises__outro {
+    justify-content: center;
+    width: clamp(28rem, 50vw, 46rem);
+    padding: 0 var(--gutter) 0 clamp(2rem, 5vw, 5rem);
+    border-top: 0;
+    border-left: 1px solid var(--line-soft);
+  }
+
+  .hs-promises__progress {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: clamp(1.5rem, 4vh, 2.5rem);
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    pointer-events: none;
+  }
+  .hs-promises__count {
+    min-width: 2.2ch;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .hs-promises__of {
+    color: var(--fg-muted);
+  }
+  .hs-promises__count-title {
+    margin-left: 1rem;
+    min-width: 16rem;
+    color: var(--fg-muted);
+  }
+  .hs-promises__bar {
+    position: relative;
+    flex: 1;
+    align-self: center;
+    height: 1px;
+    background: var(--line-soft);
+  }
+  .hs-promises__fill {
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+  }
+}
+
+/* Pinned on a shorter screen (e.g. 1024×600, 768×560): tighten the copy so each panel's text
+   column fits between the nav and the progress line instead of spilling over both. */
+@media (min-width: 768px) and (min-height: 560px) and (max-height: 759.98px) and (prefers-reduced-motion: no-preference) {
+  .hs-promise__text {
+    gap: 0.85rem;
+  }
+  .hs-promise__title {
+    font-size: clamp(1.8rem, min(3.6vw, 6vh), 3.9rem);
+  }
+  .hs-promise__body {
+    font-size: 1.12rem;
+    line-height: 1.4;
+  }
+  .hs-promise__ends {
+    padding-top: 0.9rem;
+  }
+  .hs-promise__ends ul {
+    gap: 0.1rem;
+    margin-top: 0.55rem;
+  }
+  .hs-promise__ends li {
+    font-size: 1.02rem;
+    line-height: 1.35;
+  }
+}

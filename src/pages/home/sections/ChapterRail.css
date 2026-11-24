@@ -1,0 +1,137 @@
+/* ==========================================================================
+   Chapter rail — fixed story index on the left edge  (prefix: hs-rail)
+   Only on wide screens with a fine pointer, where the gutter can hold it.
+   ========================================================================== */
+
+.hs-rail {
+  display: none;
+}
+
+@media (min-width: 1280px) and (min-height: 640px) and (hover: hover) and (pointer: fine) {
+  .hs-rail {
+    position: fixed;
+    z-index: 40;
+    top: 50%;
+    left: clamp(0.9rem, 1.4vw, 1.6rem);
+    display: grid;
+    justify-items: start;
+    gap: 1.1rem;
+    /* the semantic tokens come from data-theme (set to the section beneath), the surface stays transparent */
+    background: none;
+    color: var(--fg);
+    opacity: 0;
+    transform: translate3d(-0.75rem, -50%, 0);
+    pointer-events: none;
+    transition: opacity 0.7s var(--ease-lux), transform 0.9s var(--ease-lux);
+  }
+  .hs-rail.is-visible {
+    opacity: 1;
+    transform: translate3d(0, -50%, 0);
+    pointer-events: auto;
+  }
+
+  .hs-rail__now {
+    display: grid;
+    min-width: 2.4rem;
+    height: 1.5rem;
+    overflow: hidden;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.3;
+    color: var(--accent);
+    transition: color 0.5s var(--ease-lux);
+  }
+  .hs-rail__now-num {
+    grid-area: 1 / 1;
+    display: block;
+  }
+
+  .hs-rail__list {
+    display: grid;
+    gap: 0;
+  }
+  .hs-rail__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    /* 24px: the minimum pointer target */
+    height: 1.5rem;
+    padding-right: 0.5rem;
+    color: inherit;
+  }
+  .hs-rail__tick {
+    display: block;
+    width: 0.8rem;
+    height: 1px;
+    background: var(--fg-faint);
+    transform-origin: 0 50%;
+    transition: transform 0.7s var(--ease-lux), background-color 0.5s var(--ease-lux);
+  }
+  .hs-rail__item:hover .hs-rail__tick,
+  .hs-rail__item:focus-visible .hs-rail__tick {
+    background: var(--fg);
+    transform: scaleX(1.6);
+  }
+  .hs-rail__item.is-active .hs-rail__tick {
+    background: var(--accent);
+    transform: scaleX(2.6);
+  }
+
+  /* Titles: hidden until the rail is hovered or focused, then they open one by one */
+  .hs-rail__title {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-left: 1.3rem;
+    padding: 0.2rem 0.65rem 0.25rem;
+    white-space: nowrap;
+    background: var(--bg);
+    box-shadow: inset 0 0 0 1px var(--line-soft);
+    opacity: 0;
+    clip-path: inset(0% 100% 0% 0%);
+    transition: opacity 0.4s var(--ease-lux), clip-path 0.6s var(--ease-lux);
+  }
+  .hs-rail__title .numeral {
+    min-width: 1.9rem;
+    font-size: 0.95rem;
+    color: var(--accent);
+  }
+  .hs-rail__title .label-sm {
+    color: var(--fg-muted);
+  }
+  .hs-rail__item.is-active .hs-rail__title .label-sm,
+  .hs-rail__item:hover .hs-rail__title .label-sm {
+    color: var(--fg);
+  }
+  .hs-rail:hover .hs-rail__title,
+  .hs-rail:focus-within .hs-rail__title {
+    opacity: 1;
+    clip-path: inset(0% 0% 0% 0%);
+  }
+  .hs-rail__list li:nth-child(2) .hs-rail__title {
+    transition-delay: 0.03s;
+  }
+  .hs-rail__list li:nth-child(3) .hs-rail__title {
+    transition-delay: 0.06s;
+  }
+  .hs-rail__list li:nth-child(4) .hs-rail__title {
+    transition-delay: 0.09s;
+  }
+  .hs-rail__list li:nth-child(5) .hs-rail__title {
+    transition-delay: 0.12s;
+  }
+  .hs-rail__list li:nth-child(6) .hs-rail__title {
+    transition-delay: 0.15s;
+  }
+  .hs-rail__list li:nth-child(7) .hs-rail__title {
+    transition-delay: 0.18s;
+  }
+  .hs-rail__list li:nth-child(8) .hs-rail__title {
+    transition-delay: 0.21s;
+  }
+  .hs-rail__list li:nth-child(9) .hs-rail__title {
+    transition-delay: 0.24s;
+  }
+}

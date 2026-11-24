@@ -1,0 +1,379 @@
+/* ── Custom Services · Hero ─────────────────────────────────────────────── */
+
+.cus-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding-top: calc(var(--nav-h) + clamp(1.25rem, 4.5vh, 3.25rem));
+  padding-bottom: clamp(2.5rem, 6vh, 4.5rem);
+  background: var(--parchment);
+  color: var(--fg);
+  overflow: clip;
+  isolation: isolate;
+}
+
+/* no z-index here: the coat (z 0) must sit behind the tape (z 1) while the title stays in front (z 2) */
+.cus-hero__inner {
+  position: relative;
+}
+.cus-hero__top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  flex-wrap: wrap;
+}
+.cus-hero__where {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  color: var(--fg-muted);
+}
+.cus-hero__where .label-sm {
+  color: var(--accent);
+}
+.cus-hero__where .serif-italic {
+  font-size: 1.1rem;
+}
+
+/* title + the coat it is measured for */
+.cus-hero__stage {
+  position: relative;
+  margin-top: clamp(2rem, 8vh, 5.5rem);
+}
+.cus-hero__title {
+  position: relative;
+  z-index: 2;
+  color: var(--wine-900);
+  will-change: transform;
+}
+.cus-hero__line {
+  display: block;
+  white-space: nowrap;
+}
+.cus-hero__line--2 {
+  padding-left: clamp(2.25rem, 17vw, 19rem);
+}
+.cus-hero__w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* room for italic overhang + descenders inside the mask */
+  padding: 0.04em 0.12em 0.14em 0.02em;
+  margin: -0.04em -0.12em -0.14em -0.02em;
+}
+.cus-hero__w > span {
+  display: inline-block;
+  will-change: transform;
+}
+/* gold foil, deepened so even its highlight holds ≥3:1 (large text) on parchment */
+.cus-hero__gold {
+  background: linear-gradient(115deg, #5e461c 0%, #84662e 26%, #987637 46%, #84662e 64%, #6b5223 84%, #8a6a30 100%);
+  background-size: 160% 100%;
+  background-position: 30% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── the Camel Trench ── */
+.cus-hero__coat {
+  --coat-h: clamp(16rem, 36vw, 35rem);
+  position: absolute;
+  z-index: 0;
+  top: calc(var(--coat-h) * -0.06);
+  right: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+  pointer-events: none;
+  will-change: transform;
+}
+.cus-hero__coat-cap {
+  display: grid;
+  justify-items: end;
+  gap: 0.2rem;
+  text-align: right;
+}
+.cus-hero__coat-cap .label-sm {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  color: var(--accent);
+}
+.cus-hero__coat-cap .numeral {
+  font-size: 0.95rem;
+  letter-spacing: 0;
+}
+.cus-hero__coat-cap .serif-italic {
+  font-size: 1rem;
+  color: var(--fg-muted);
+}
+
+.cus-coat {
+  height: var(--coat-h);
+  width: auto;
+  aspect-ratio: 400 / 660;
+  overflow: visible;
+}
+.cus-coat__cloth {
+  fill: var(--camel);
+  opacity: 0.6;
+}
+.cus-coat__cloth--facing {
+  opacity: 0.72;
+}
+.cus-coat__twill {
+  stroke: #7c5d36;
+  stroke-width: 0.7;
+  opacity: 0.32;
+}
+.cus-coat__shirt {
+  fill: var(--ivory-50);
+}
+.cus-coat__metal {
+  fill: var(--gold-300);
+}
+.cus-coat__draw {
+  fill: none;
+  stroke: var(--gold-700);
+  stroke-width: 1.35;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.cus-coat__fine {
+  stroke-width: 1;
+}
+.cus-coat__hanger {
+  stroke: var(--gold-600);
+  stroke-width: 2.2;
+}
+.cus-coat__stitch {
+  fill: none;
+  stroke: var(--gold-700);
+  stroke-width: 0.8;
+  stroke-dasharray: 2.5 3;
+  opacity: 0.75;
+}
+.cus-coat__btn {
+  fill: var(--wine-800);
+  stroke: var(--gold-500);
+  stroke-width: 0.8;
+}
+.cus-coat__btn-eye {
+  fill: var(--gold-300);
+}
+.cus-coat__dim {
+  fill: none;
+  stroke: var(--wine-700);
+  stroke-width: 0.9;
+}
+.cus-coat__ext {
+  fill: none;
+  stroke: var(--wine-700);
+  stroke-width: 0.7;
+  stroke-dasharray: 3 4;
+  opacity: 0.55;
+}
+.cus-coat__dim-t {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  fill: var(--wine-800);
+}
+
+/* ── the tape ── */
+.cus-hero__tape {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: clamp(190px, 21vw, 330px);
+  margin-top: clamp(-4.5rem, -4.5vw, -1.25rem);
+  pointer-events: none;
+  will-change: transform;
+}
+.cus-tape {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 14px 18px rgba(42, 10, 18, 0.13));
+}
+.cus-tape__edge,
+.cus-tape__body,
+.cus-tape__ticks {
+  fill: none;
+  stroke-linecap: butt;
+}
+.cus-tape__edge {
+  stroke: var(--gold-600);
+  stroke-width: 46;
+}
+.cus-tape__body {
+  stroke: var(--ivory-50);
+  stroke-width: 44;
+}
+.cus-tape__ticks {
+  stroke: var(--wine-800);
+  stroke-width: 46;
+  opacity: 0.72;
+}
+.cus-tape__ticks--major {
+  opacity: 0.9;
+}
+.cus-tape__centre {
+  fill: none;
+  stroke: none;
+}
+.cus-tape__nums {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  fill: var(--wine-700);
+}
+.cus-tape__case-shell {
+  fill: var(--wine-900);
+  stroke: var(--gold-500);
+  stroke-width: 1.4;
+}
+.cus-tape__case-ring {
+  fill: none;
+  stroke: var(--gold-400);
+  stroke-width: 0.8;
+}
+.cus-tape__case-ring--dash {
+  stroke-dasharray: 2 4;
+  opacity: 0.7;
+}
+.cus-tape__case-notch {
+  stroke: var(--gold-300);
+  stroke-width: 2.2;
+}
+.cus-tape__case-f {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 30px;
+  fill: var(--gold-300);
+  text-anchor: middle;
+}
+
+/* ── foot ── */
+.cus-hero__foot {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 3.6fr) auto;
+  align-items: end;
+  gap: clamp(1.5rem, 4vw, 4.5rem);
+  margin-top: auto;
+  padding-top: clamp(0.5rem, 2vh, 1.5rem);
+}
+.cus-hero__lead {
+  max-width: 36rem;
+  color: var(--fg-muted);
+}
+.cus-hero__facts {
+  margin: 0;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+.cus-hero__facts > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.cus-hero__facts dt {
+  flex: none;
+  color: var(--accent);
+}
+.cus-hero__facts dd {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.12rem;
+  text-align: right;
+}
+.cus-hero__facts .numeral {
+  font-size: 1.35rem;
+  color: var(--accent);
+}
+.cus-hero__ctas {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.4rem;
+}
+
+@media (max-width: 1100px) {
+  .cus-hero__foot {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .cus-hero__ctas {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem 2.25rem;
+  }
+  .cus-hero__coat {
+    --coat-h: clamp(15rem, 34vw, 22rem);
+    top: calc(var(--coat-h) * -0.08);
+  }
+  .cus-hero__coat-cap .serif-italic {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .cus-hero {
+    min-height: auto;
+  }
+  .cus-hero__line {
+    white-space: normal;
+  }
+  .cus-hero__line--2 {
+    padding-left: 1.75rem;
+  }
+  .cus-hero__where {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .cus-hero__title {
+    max-width: 68%;
+  }
+  .cus-hero__coat {
+    --coat-h: min(54vw, 15rem);
+    top: 0.25rem;
+    right: -0.25rem;
+  }
+  .cus-hero__coat-cap {
+    display: none;
+  }
+  .cus-coat__dims {
+    display: none;
+  }
+  .cus-coat__draw {
+    stroke-width: 2.2;
+  }
+  .cus-coat__fine {
+    stroke-width: 1.6;
+  }
+  .cus-hero__tape {
+    margin-top: -0.5rem;
+  }
+  .cus-hero__foot {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+}

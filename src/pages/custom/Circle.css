@@ -1,0 +1,207 @@
+/* ── Custom Services · The Femmora Circle (a short band between booking and the questions) ── */
+
+.cus-circle {
+  position: relative;
+  padding-block: clamp(4.5rem, 10vw, 8rem);
+  background: var(--bg);
+  color: var(--fg);
+  overflow: clip;
+  isolation: isolate;
+}
+/* a faint satin weave across the burgundy — texture, not a colour gradient */
+.cus-circle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: repeating-linear-gradient(100deg, transparent 0 3px, rgba(248, 244, 236, 0.022) 3px 4px);
+  pointer-events: none;
+}
+
+.cus-circle__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 4.6fr) minmax(0, 7.4fr);
+  gap: clamp(2.5rem, 6vw, 7rem);
+  align-items: center;
+}
+
+/* ── the ring ── */
+.cus-circle__art {
+  position: relative;
+  width: min(100%, 30rem);
+  justify-self: center;
+}
+.cus-ring {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.cus-ring__outer,
+.cus-ring__inner,
+.cus-ring__hair {
+  fill: none;
+}
+.cus-ring__outer {
+  stroke: var(--gold-500);
+  stroke-width: 1;
+}
+.cus-ring__inner {
+  stroke: var(--gold-500);
+  stroke-width: 0.7;
+  opacity: 0.6;
+}
+.cus-ring__hair {
+  stroke: var(--gold-500);
+  stroke-width: 0.5;
+  stroke-dasharray: 1.5 4;
+  opacity: 0.5;
+}
+.cus-ring__text {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 450;
+  text-transform: uppercase;
+  fill: var(--gold-300);
+}
+.cus-ring__mono {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 128px;
+  text-anchor: middle;
+}
+.cus-ring__node-halo {
+  fill: var(--wine-900);
+  stroke: var(--gold-500);
+  stroke-width: 0.8;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.6s var(--ease-lux), stroke 0.5s var(--ease-lux);
+}
+.cus-ring__node-dot {
+  fill: var(--gold-400);
+  transition: fill 0.5s var(--ease-lux);
+}
+.cus-ring__node-n {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13px;
+  text-anchor: middle;
+  fill: var(--gold-400);
+}
+.cus-ring__node.is-on .cus-ring__node-halo {
+  transform: scale(1.5);
+  stroke: var(--gold-200);
+}
+.cus-ring__node.is-on .cus-ring__node-dot {
+  fill: var(--gold-200);
+}
+
+/* ── the copy ── */
+.cus-circle__title {
+  margin-top: 1.4rem;
+}
+.cus-circle__lead {
+  margin-top: clamp(1.1rem, 2vw, 1.6rem);
+  max-width: 38rem;
+}
+.cus-circle__list {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+.cus-circle__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  column-gap: 0.9rem;
+  row-gap: 0.35rem;
+  padding: 1.35rem 1.5rem 1.4rem 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.cus-circle__item:nth-child(even) {
+  padding-left: 1.5rem;
+  padding-right: 0;
+  border-left: 1px solid var(--line-soft);
+}
+.cus-circle__item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--gold-400);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.8s var(--ease-lux);
+}
+.cus-circle__item.is-on::after {
+  transform: scaleX(1);
+}
+.cus-circle__n {
+  grid-row: 1 / span 2;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  color: var(--accent);
+  transition: transform 0.7s var(--ease-lux);
+}
+.cus-circle__item.is-on .cus-circle__n {
+  transform: translateX(0.2rem);
+}
+.cus-circle__t {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.2rem, 1.6vw, 1.45rem);
+  line-height: 1.2;
+}
+.cus-circle__b {
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--fg-muted);
+}
+
+.cus-circle__foot {
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem 2.5rem;
+}
+.cus-circle__next {
+  display: grid;
+  gap: 0.4rem;
+  max-width: 34rem;
+}
+.cus-circle__next .label-sm {
+  color: var(--accent);
+}
+.cus-circle__next-t {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.12rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+
+@media (max-width: 1023px) {
+  .cus-circle__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cus-circle__art {
+    width: min(68vw, 20rem);
+  }
+}
+
+@media (max-width: 760px) {
+  .cus-circle__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cus-circle__item,
+  .cus-circle__item:nth-child(even) {
+    padding: 1.2rem 0;
+    border-left: 0;
+  }
+}

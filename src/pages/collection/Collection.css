@@ -1,0 +1,33 @@
+/* ==========================================================================
+   Collection — page shell & house-codes band (prefix col-)
+   ========================================================================== */
+.col-page {
+  overflow-x: clip;
+  /* = the 3D rack's flood colour for /collection */
+  background: var(--wine-900);
+}
+
+.col-band {
+  position: relative;
+  padding-block: clamp(2.75rem, 7vh, 4.5rem);
+  background: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+}
+.col-band__rule {
+  height: 1px;
+  margin-inline: var(--gutter);
+  background: var(--line-soft);
+}
+.col-band__mq {
+  padding-block: clamp(1.75rem, 4.5vh, 3rem);
+}
+.col-band__mq .h2 {
+  font-size: clamp(2.2rem, 5vw, 4.75rem);
+  padding-right: 0.08em; /* keep italic overhangs from clipping */
+  color: var(--fg);
+}
+.col-band__mq > div > span:nth-child(even) .h2 {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(201, 165, 92, 0.6);
+}

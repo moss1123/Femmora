@@ -1,0 +1,92 @@
+/* ── Custom Services · page shell + shared section header ─────────────────── */
+
+.cus {
+  overflow-x: clip;
+}
+
+/* Gold text on light grounds. Small tracked labels must clear 4.5:1:
+   - ivory (#f3ede2): the global accent (gold-600) is too pale — use gold-700 (#84662e, 4.6:1).
+   - parchment (#e8dcc2): gold-700 only reaches 3.9:1 there, so this page inks its gold one step deeper
+     (#765a26, 4.7:1 on parchment, 5.9:1 on the ivory panels) — still read as gold, never as brown. */
+.cus [data-theme='ivory'] {
+  --accent: var(--gold-700);
+  --accent-strong: var(--wine-800);
+}
+.cus[data-theme='parchment'],
+.cus [data-theme='parchment'] {
+  --accent: #765a26;
+}
+
+/* Editorial section header: heading left, lead settles against its baseline on the right. */
+.cus-head {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4.6fr);
+  gap: clamp(1.75rem, 5vw, 6rem);
+  align-items: end;
+}
+.cus-head__title {
+  margin-top: 1.5rem;
+  max-width: 16ch;
+}
+.cus-head__r {
+  padding-bottom: 0.35rem;
+}
+.cus-head__r .lead {
+  max-width: 34rem;
+}
+.cus-head__r .lead::before {
+  content: '';
+  display: block;
+  width: 2.75rem;
+  height: 1px;
+  margin-bottom: 1.25rem;
+  background: var(--accent);
+  opacity: 0.7;
+}
+
+/* marquee band between the tiers and the atelier process */
+.cus-band {
+  position: relative;
+  background: var(--bg);
+  color: var(--fg);
+  padding-block: clamp(0.5rem, 1.5vw, 1.25rem) clamp(2.5rem, 5vw, 4.5rem);
+  overflow: clip;
+}
+.cus-band .rule-gold {
+  margin: 0;
+}
+.cus-band__mq {
+  padding-block: clamp(1.1rem, 2.4vw, 2rem);
+}
+.cus-band__mq .h2 {
+  font-size: clamp(2.1rem, 4.8vw, 4.6rem);
+  color: var(--wine-900);
+}
+.cus-band__mq .mq__track > span:nth-child(even) .h2 {
+  color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .cus-head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+  .cus-head__r .lead::before {
+    display: none;
+  }
+}
+
+/* Phones: long tracked-caps labels ("Request a programme outline", "Book a measuring session") must fit a 343px
+   column — tighten the tracking a touch and let a label wrap rather than overflow its button. */
+@media (max-width: 480px) {
+  .cus .fbtn {
+    max-width: 100%;
+    letter-spacing: 0.22em;
+  }
+  .cus .fbtn:not(.fbtn--ghost) {
+    padding-inline: 1.35rem;
+  }
+  .cus .fbtn__label {
+    text-align: center;
+  }
+}
